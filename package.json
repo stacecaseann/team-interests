@@ -1,0 +1,41 @@
+{
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-validator": "^7.2.1",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.18.2",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.36.0",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "swagger-autogen": "^2.23.7"
+  },
+  "name": "interests",
+  "version": "1.0.0",
+  "description": "Track and retrieve favorite interests of the user",  
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stacecaseann/team-interests.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stacecaseann/team-interests/issues"
+  },
+  "homepage": "https://github.com/stacecaseann/team-interests#readme",
+  "description": ""
+}
