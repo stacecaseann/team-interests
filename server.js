@@ -5,6 +5,15 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).json({ error: err.message || 'Internal Server Error' });
+});
+
+process.on('uncaughtException', (err, origin) => {
+  console.log(process.stderr.id, `Caught exception: ${err}\n` + `Exception origin: ${origin}`)
+})
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
