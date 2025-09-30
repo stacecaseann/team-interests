@@ -1,14 +1,12 @@
 var recipeModel = require('../database/recipeModel');
 
+// Controller function to get all recipes
 const getAllRecipes = async (req, res) => {
-  //#swagger.tags = ['Recipes']
-  //#swagger.summary = 'Gets all recipes.'
   try {
-    const result = await recipeModel.getAllRecipes();
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
+    const recipes = await recipeModel.find();
+    res.status(200).json(recipes);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: 'Error fetching recipes', error: err }); // Internal Server Error
   }
 };
 

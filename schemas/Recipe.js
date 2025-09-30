@@ -29,7 +29,7 @@ const recipeSchema = new mongoose.Schema({
     immutable: true,
     type: Date,
     default: () => Date.now(),
-  },  
+  },
 });
 
 //sample functions
