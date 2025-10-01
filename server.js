@@ -4,43 +4,61 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongodb = require('./database/connect');
-const port = process.env.PORT || 3000;
+const cors = require('cors');
+const PORT = process.env.PORT;
 const mainRoute = require('./routes/index');
 
 // Middleware to parse JSON bodies - replaces body-parser so I deleted it from package.json
 app.use(express.json());
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(err.status || 500).json({ error: err.message || 'Internal Server Error' });
-});
-
+// Global error handling for uncaught exceptions
 process.on('uncaughtException', (err, origin) => {
-  console.log(process.stderr.id, `Caught exception: ${err}\n` + `Exception origin: ${origin}`)
-})
+  console.error(
+    `Caught exception: ${err}\n` +
+      `Exception origin: ${origin}\n` +
+      `Stack: ${err.stack}`,
+  );
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization',
-  );
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-  );
-  next();
+  process.exitCode = 1; // Indicate an uncaught exception occurred
 });
+
+// Global error handling for unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error(
+    'Unhandled Rejection at:',
+    promise,
+    'reason:',
+    reason,
+    'Stack:',
+    reason.stack,
+  );
+
+  process.exitCode = 2; // Indicate an unhandled rejection occurred
+});
+
+// CORS Middleware
+app.use(cors());
 
 // Created mainRoute variable and used it here for better organization
 app.use('/', mainRoute);
 
-mongodb.initDb((err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    app.listen(port, () =>
-      console.log(`Database is listening on port: ${port}`),
-    );
-  }
+// Added error handling middleware
+app.use((err, _req, res, _next) => {
+  console.error(err.stack);
+  res
+    .status(err.status || 500)
+    .json({ error: err.message || 'Internal Server Error' });
 });
+
+async function startServer() {
+  try {
+    await mongodb.initDb();
+    app.listen(PORT, () =>
+      console.log(`Database is listening on port: ${PORT}`),
+    );
+  } catch (err) {
+    console.error('Failed to start server:', err);
+  }
+}
+
+startServer();

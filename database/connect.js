@@ -9,7 +9,7 @@ const initDb = async () => {
     return _isConnected;
   }
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGO_URI);
     _isConnected = mongoose.connection;
     console.log('MongoDB connected');
 
