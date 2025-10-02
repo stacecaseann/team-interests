@@ -3,10 +3,10 @@ const displayUsers = (_req, res) => {
     res.send(
       `<h1>Users and their Interests</h1>
             <ul>
-            <li><a href='/stacy'>Stacy</a></li>
-            <li><a href='/fernando'>Fernando</a></li>
-            <li><a href='/ovinson'>Ovinson</a></li>
-            <li><a href='/cris'>Cris</a></li>
+            <li><a href='/users/stacy'>Stacy</a></li>
+            <li><a href='/users/fernando'>Fernando</a></li>
+            <li><a href='/users/ovinson'>Ovinson</a></li>
+            <li><a href='/users/cris'>Cris</a></li>
             </ul>`,
     );
   } catch (err) {
@@ -14,6 +14,23 @@ const displayUsers = (_req, res) => {
   }
 };
 
+const getUser = (req, res) => {
+  const { username } = req.params;
+  const users = {
+    stacy: { interests: 'recipes' },
+    fernando: { interests: 'scriptures' },
+    ovinson: { interests: 'movies' },
+    cris: { interests: 'speakers' },
+  };
+  const user = users[username];
+  if (user) {
+    res.redirect(`/${user.interests}`);
+  } else {
+    res.status(404).send('User not found');
+  }
+};
+
 module.exports = {
   displayUsers,
+  getUser,
 };

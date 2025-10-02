@@ -1,11 +1,15 @@
-const { ObjectId } = require('mongodb');
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Types;
 
 const validateObjectId = (req, res, next) => {
-  const id = req.params.recipeId;
+  const id = req.params._id || req.params.id;
+  if (!id) {
+    return res.status(400).json({ error: 'ID parameter is required' });
+  }
   if (!ObjectId.isValid(id)) {
     return res.status(400).json({ error: 'Invalid ID format' });
   }
-  next();
+  return next();
 };
 
 module.exports = {
