@@ -1,12 +1,13 @@
 {
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "express-validator": "^7.2.1",
     "mongodb": "^6.20.0",
     "mongoose": "^8.18.2",
-    "swagger-ui-express": "^5.0.1",
-    "swagger-autogen": "^2.23.7"
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "eslint": "^8.57.1",
@@ -29,7 +30,6 @@
     "dev": "nodemon server.js",
     "prod": "node server.js",
     "swagger": "node swagger/swagger.js"
-    
   },
   "repository": {
     "type": "git",

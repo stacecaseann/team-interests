@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const asyncHandler = require('../middleware/asyncHandler')
+const asyncHandler = require('../middleware/asyncHandler');
 
-const recipeController = require('../controllers/recipeController');
+const recipeController = require('../controllers/users/stacy/recipeController');
 
 router.get('/', asyncHandler(recipeController.getAllRecipes));
 
