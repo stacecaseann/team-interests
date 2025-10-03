@@ -13,25 +13,47 @@ const validateObjectId = (req, res, next) => {
   return next();
 };
 
-const validateGameData = [
-  body('name').notEmpty().withMessage('Name is required.'),
-  body('genre').notEmpty().withMessage('Genre is required.'),
-  body('developer').notEmpty().withMessage('Developer is required.'),
-  body('releaseDate')
+const validateMovieData = [
+  body('title')
     .notEmpty()
-    .withMessage('Release Date is required.')
-    .isISO8601()
-    .toDate()
-    .withMessage('Release Date must be a valid date.'),
-  body('platforms')
+    .withMessage('Title is required.')
+    .isLength({ min: 2, max: 70 })
+    .withMessage('Title must be between 2 and 70 characters.'),
+  body('director')
+    .notEmpty()
+    .withMessage('Director is required.')
+    .isLength({ min: 2, max: 30 })
+    .withMessage('Director must be between 2 and 30 characters.'),
+  body('language')
+    .notEmpty()
+    .withMessage('Language is required.')
+    .isLength({ min: 2, max: 20 })
+    .withMessage('Languages must be between 2 and 20 characters.'),
+  body('year')
+    .notEmpty()
+    .withMessage('Year is required.')
+    .isNumeric()
+    .withMessage('Year must be a number.')
+    .isLength({ min: 4, max: 4 })
+    .withMessage('Year must be 4 digits.'),
+  body('genre')
+    .notEmpty()
+    .withMessage('Genre is required.')
     .isArray({ min: 1 })
-    .withMessage('Platforms must be an array with at least one platform.'),
-  body('rating')
-    .isFloat({ min: 1, max: 10 })
-    .withMessage('Rating must be a number between 1 and 10.'),
-  body('price')
-    .isFloat({ min: 0 })
-    .withMessage('Price must be a positive number.'),
+    .withMessage('At least one genre must be specified.'),
+  body('genre.*')
+    .isString()
+    .withMessage('Genre must be a string.')
+    .trim()
+    .isLength({ min: 2, max: 15 })
+    .withMessage('Genre must be between 2 and 15 characters.')
+    .notEmpty()
+    .withMessage('Genre cannot be empty.'),
+  body('synopsis')
+    .notEmpty()
+    .withMessage('Synopsis is required.')
+    .isLength({ min: 10, max: 300 })
+    .withMessage('Synopsis must be between 10 and 300 characters.'),
 ];
 
 const handleValidationErrors = (req, res, next) => {
@@ -44,6 +66,6 @@ const handleValidationErrors = (req, res, next) => {
 
 module.exports = {
   validateObjectId,
-  validateGameData,
+  validateMovieData,
   handleValidationErrors,
 };

@@ -15,7 +15,6 @@ router.use('/', homeRoutes);
 router.use('/users', userRoutes);
 router.use('/recipes', recipeRoutes);
 router.use('/movies', movieRoutes);
-
 router.use('/speakers', require('./conferenceSpeakers'));
 
 module.exports = router;
