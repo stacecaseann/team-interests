@@ -10,4 +10,6 @@ router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 router.use('/recipes', require('./recipes'));
 
+router.use('/speakers', require('./conferenceSpeakers'));
+
 module.exports = router;
