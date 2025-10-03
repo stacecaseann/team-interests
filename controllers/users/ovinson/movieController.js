@@ -37,7 +37,7 @@ const createMovie = async (req, res) => {
     const result = await newMovie.save();
     res.status(201).json(result);
   } catch (err) {
-    console.error('Error creating movie:', err);
+    // console.error('Error creating movie:', err.message);
     if (err.code === 11000) {
       return res
         .status(409)
@@ -65,7 +65,7 @@ const updateMovie = async (req, res) => {
     }
     res.status(200).json(result);
   } catch (err) {
-    console.error('Error updating movie:', err);
+    // console.error('Error updating movie:', err);
     if (err.code === 11000) {
       return res
         .status(409)
@@ -90,7 +90,7 @@ const deleteMovie = async (req, res) => {
     if (!result) {
       return res.status(404).json({ error: 'Movie not found' });
     }
-    return res.status(204).json({ message: 'Movie deleted successfully' });
+    return res.status(204).send();
   } catch (err) {
     return res.status(500).json({ error: 'Failed to delete movie' });
   }

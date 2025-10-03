@@ -4,7 +4,7 @@ GET http://localhost:3003/movies
 Accept: application/json
 
 ### Get a movie by ID
-GET http://localhost:3003/movies/68dea256731c028723b37105
+GET http://localhost:3003/movies/68e034d4d6e6e300e74440ac
 Accept: application/json
 
 ### Create a new movie
@@ -12,28 +12,26 @@ POST http://localhost:3003/movies
 Content-Type: application/json
 
 {
-  "title": "Inception",
-  "director": "Christopher Nolan",
+  "title": "Test",
+  "director": "TBD",
   "language": "English",
-  "year": 2010,
-  "genre": ["Sci-Fi", "Thriller"],
+  "year": 2024,
+  "genre": ["drama"],
   "synopsis": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO."
 }
 
 ### Update a movie by ID
-PUT http://localhost:3003/movies/68dea256731c028723b37105
+PUT http://localhost:3003/movies/68e034d4d6e6e300e74440ac
 Content-Type: application/json
 
 {
-  "title": "Saints and Soldiers",
-  "director": "Ryan Little",
+  "title": "Test Updated",
+  "director": "TBD",
   "language": "English",
-  "year": 2003,
-  "genre": [
-    "War Drama"
-  ],
-  "synopsis": "Set during World War II, the film follows a group of Allied soldiers, including an LDS soldier, as they struggle to survive behind enemy lines and deliver crucial intelligence."
+  "year": 2024,
+  "genre": ["drama"],
+  "synopsis": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO."
 }
 
 ### Delete a movie by ID
-DELETE http://localhost:3003/movies/68dea256731c028723b37105
+DELETE http://localhost:3003/movies/68e034d4d6e6e300e74440ac
