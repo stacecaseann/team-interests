@@ -4,7 +4,7 @@ GET https://team-interests.onrender.com/movies
 Accept: application/json
 
 ### Get a movie by ID
-GET https://team-interests.onrender.com/movies/:id
+GET https://team-interests.onrender.com/movies/68dddcaa4dda3d6e3d19ba34
 Accept: application/json
 
 ### Create a new movie
@@ -21,19 +21,17 @@ Content-Type: application/json
 }
 
 ### Update a movie by ID
-PUT https://team-interests.onrender.com/movies/:id
+PUT https://team-interests.onrender.com/movies/68dddcaa4dda3d6e3d19ba34
 Content-Type: application/json
 
 {
-  "title": "Saints and Soldiers",
-  "director": "Ryan Little",
+  "title": "Test Updated",
+  "director": "TBD",
   "language": "English",
-  "year": 2003,
-  "genre": [
-    "War Drama"
-  ],
-  "synopsis": "Set during World War II, the film follows a group of Allied soldiers, including an LDS soldier, as they struggle to survive behind enemy lines and deliver crucial intelligence."
+  "year": 2024,
+  "genre": ["drama"],
+  "synopsis": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO."
 }
 
 ### Delete a movie by ID
-DELETE https://team-interests.onrender.com/movies/:id
+DELETE https://team-interests.onrender.com/movies/68dddcaa4dda3d6e3d19ba34
