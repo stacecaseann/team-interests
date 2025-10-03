@@ -1,0 +1,39 @@
+// Movie Routes locally tested with REST Client extension
+### Get all movies
+GET http://localhost:3003/movies
+Accept: application/json
+
+### Get a movie by ID
+GET http://localhost:3003/movies/68dea256731c028723b37105
+Accept: application/json
+
+### Create a new movie
+POST http://localhost:3003/movies
+Content-Type: application/json
+
+{
+  "title": "Inception",
+  "director": "Christopher Nolan",
+  "language": "English",
+  "year": 2010,
+  "genre": ["Sci-Fi", "Thriller"],
+  "synopsis": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO."
+}
+
+### Update a movie by ID
+PUT http://localhost:3003/movies/68dea256731c028723b37105
+Content-Type: application/json
+
+{
+  "title": "Saints and Soldiers",
+  "director": "Ryan Little",
+  "language": "English",
+  "year": 2003,
+  "genre": [
+    "War Drama"
+  ],
+  "synopsis": "Set during World War II, the film follows a group of Allied soldiers, including an LDS soldier, as they struggle to survive behind enemy lines and deliver crucial intelligence."
+}
+
+### Delete a movie by ID
+DELETE http://localhost:3003/movies/68dea256731c028723b37105

@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const asyncHandler = require('../middleware/asyncHandler');
 const movieController = require('../controllers/users/ovinson/movieController');
-const { validateObjectId } = require('../middleware/validation');
 const {
-  validateGameData,
+  validateObjectId,
+  validateMovieData,
   handleValidationErrors,
 } = require('../middleware/validation');
 
@@ -15,15 +15,15 @@ router.get(
 );
 router.post(
   '/',
-  //   validateGameData,
-  //   handleValidationErrors,
+  validateMovieData,
+  handleValidationErrors,
   asyncHandler(movieController.createMovie),
 );
 router.put(
   '/:id',
-  //   validateGameData,
-  //   handleValidationErrors,
   validateObjectId,
+  validateMovieData,
+  handleValidationErrors,
   asyncHandler(movieController.updateMovie),
 );
 router.delete(

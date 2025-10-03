@@ -1,0 +1,39 @@
+// Movie Production Routes tested with REST Client extension
+### Get all movies
+GET https://team-interests.onrender.com/movies
+Accept: application/json
+
+### Get a movie by ID
+GET https://team-interests.onrender.com/movies/:id
+Accept: application/json
+
+### Create a new movie
+POST https://team-interests.onrender.com/movies
+Content-Type: application/json
+
+{
+  "title": "Test",
+  "director": "TBD",
+  "language": "English",
+  "year": 2024,
+  "genre": ["drama"],
+  "synopsis": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO."
+}
+
+### Update a movie by ID
+PUT https://team-interests.onrender.com/movies/:id
+Content-Type: application/json
+
+{
+  "title": "Saints and Soldiers",
+  "director": "Ryan Little",
+  "language": "English",
+  "year": 2003,
+  "genre": [
+    "War Drama"
+  ],
+  "synopsis": "Set during World War II, the film follows a group of Allied soldiers, including an LDS soldier, as they struggle to survive behind enemy lines and deliver crucial intelligence."
+}
+
+### Delete a movie by ID
+DELETE https://team-interests.onrender.com/movies/:id
