@@ -1,35 +1,33 @@
-const router = require('express').Router();
-const asyncHandler = require('../middleware/asyncHandler');
-const movieController = require('../controllers/users/ovinson/movieController');
+const express = require('express');
+const router = express.Router();
+const movieController = require('../controllers/movieController');
 const {
   validateObjectId,
   validateMovieData,
   handleValidationErrors,
 } = require('../middleware/validation');
 
-router.get('/', asyncHandler(movieController.getMovies));
-router.get(
-  '/:id',
-  validateObjectId,
-  asyncHandler(movieController.getMovieById),
-);
+// #swagger.tags = ['Movies']
+// #swagger.description = 'Endpoint to manage movies.'
+router.get('/', movieController.getMovies);
+
+router.get('/:id', validateObjectId, movieController.getMovieById);
+
 router.post(
   '/',
   validateMovieData,
   handleValidationErrors,
-  asyncHandler(movieController.createMovie),
+  movieController.createMovie,
 );
+
 router.put(
   '/:id',
   validateObjectId,
   validateMovieData,
   handleValidationErrors,
-  asyncHandler(movieController.updateMovie),
+  movieController.updateMovie,
 );
-router.delete(
-  '/:id',
-  validateObjectId,
-  asyncHandler(movieController.deleteMovie),
-);
+
+router.delete('/:id', validateObjectId, movieController.deleteMovie);
 
 module.exports = router;
