@@ -1,4 +1,4 @@
-const recipeModel = require('../../../schemas/RecipeSchema');
+const recipeModel = require('../schemas/RecipeSchema');
 
 // Controller function to get all recipes
 const getAllRecipes = async (req, res) => {

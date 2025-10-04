@@ -1,8 +1,6 @@
-const Movie = require('../../../schemas/MovieSchema');
+const Movie = require('../schemas/MovieSchema');
 
 const getMovies = async (req, res) => {
-  //#swagger.tags = ['Movies']
-  //#swagger.description = 'Endpoint to get all movies.'
   try {
     const result = await Movie.find();
     if (result.length === 0) {
@@ -15,8 +13,6 @@ const getMovies = async (req, res) => {
 };
 
 const getMovieById = async (req, res) => {
-  //#swagger.tags = ['Movies']
-  //#swagger.description = 'Endpoint to get a movie by its ID.'
   const { id } = req.params;
   try {
     const result = await Movie.findById(id);
@@ -30,14 +26,17 @@ const getMovieById = async (req, res) => {
 };
 
 const createMovie = async (req, res) => {
-  //#swagger.tags = ['Movies']
-  //#swagger.description = 'Endpoint to create a new movie.'
-  const newMovie = new Movie(req.body);
   try {
-    const result = await newMovie.save();
-    res.status(201).json(result);
+    const result = await Movie.create({
+      title: req.body.title,
+      director: req.body.director,
+      language: req.body.language,
+      year: req.body.year,
+      genre: req.body.genre,
+      synopsis: req.body.synopsis,
+    });
+    return res.status(201).json(result);
   } catch (err) {
-    // console.error('Error creating movie:', err.message);
     if (err.code === 11000) {
       return res
         .status(409)
@@ -54,18 +53,25 @@ const createMovie = async (req, res) => {
 };
 
 const updateMovie = async (req, res) => {
-  //#swagger.tags = ['Movies']
-  //#swagger.description = 'Endpoint to update a movie by its ID.'
   const { id } = req.params;
-  const updates = req.body;
   try {
-    const result = await Movie.findByIdAndUpdate(id, updates, { new: true });
+    const result = await Movie.findByIdAndUpdate(
+      id,
+      {
+        title: req.body.title,
+        director: req.body.director,
+        language: req.body.language,
+        year: req.body.year,
+        genre: req.body.genre,
+        synopsis: req.body.synopsis,
+      },
+      { new: true },
+    );
     if (!result) {
       return res.status(404).json({ error: 'Movie not found' });
     }
     res.status(200).json(result);
   } catch (err) {
-    // console.error('Error updating movie:', err);
     if (err.code === 11000) {
       return res
         .status(409)
@@ -82,8 +88,6 @@ const updateMovie = async (req, res) => {
 };
 
 const deleteMovie = async (req, res) => {
-  //#swagger.tags = ['Movies']
-  //#swagger.description = 'Endpoint to delete a movie by its ID.'
   const { id } = req.params;
   try {
     const result = await Movie.findByIdAndDelete(id);
