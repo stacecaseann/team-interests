@@ -5,6 +5,12 @@
     "description": "This API allows users to see our interests endpoints and add/update/delete if authenticated.",
     "version": "1.0.0"
   },
+  "tags": [
+    {
+      "name": "Speakers",
+      "description": "Operations related to Conference Speakers"
+    }
+  ],
   "host": "team-interests.onrender.com",
   "basePath": "/",
   "schemes": [
@@ -230,7 +236,8 @@
     },
     "/speakers/": {
       "get": {
-        "description": "",
+        "tags": ["Speakers"],
+        "description": "Gets all speakers from the database",
         "responses": {
           "200": {
             "description": "OK"
@@ -244,7 +251,8 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": ["Speakers"],
+        "description": "Creates a new speaker",
         "parameters": [
           {
             "name": "body",
@@ -259,10 +267,10 @@
                   "example": "any"
                 },
                 "age": {
-                  "example": "any"
+                  "example": 0
                 },
                 "birthYear": {
-                  "example": "any"
+                  "example": 1920
                 },
                 "quote": {
                   "example": "any"
@@ -286,7 +294,8 @@
     },
     "/speakers/{id}": {
       "get": {
-        "description": "",
+        "tags": ["Speakers"],
+        "description": "Gets a speaker by their ID",
         "parameters": [
           {
             "name": "id",
@@ -308,13 +317,29 @@
         }
       },
       "put": {
-        "description": "",
+        "tags": ["Speakers"],
+        "description": "Updates a speaker",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": { "type": "string", "example": "any" },
+                "lastName": { "type": "string", "example": "any" },
+                "age": { "type": "number", "example": 0 },
+                "birthYear": { "type": "number", "example": 1920 },
+                "quote": { "type": "string", "example": "Any Quote" }
+              }
+            }
           }
         ],
         "responses": {
@@ -333,7 +358,8 @@
         }
       },
       "delete": {
-        "description": "",
+        "tags": ["Speakers"],
+        "description": "Deletes a speaker",
         "parameters": [
           {
             "name": "id",
