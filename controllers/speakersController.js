@@ -55,21 +55,35 @@ const createSpeaker = async (req, res) => {
 };
 
 const updateSpeaker = async (req, res) => {
-  const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: 'You passed in an invalid ID' });
-  }
   try {
-    const result = await Speaker.findByIdAndUpdate(id, req.body, {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'You passed in an invalid ID' });
+    }
+
+    const speakerData = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      age: req.body.age,
+      birthYear: req.body.birthYear,
+      quote: req.body.quote
+    };
+
+    const result = await Speaker.findByIdAndUpdate(id, speakerData, {
       new: true,
       runValidators: true,
       context: 'query',
     });
+
     if (!result) {
       return res.status(404).json({ error: 'Your speaker was not found' });
     }
 
-    return res.status(200).json(result);
+    return res.status(200).json({
+      message: "Your speaker was updated!",
+      updatedSpeaker: result
+    });
+
   } catch (error) {
     if (error.name === 'ValidationError') {
       const message = Object.values(error.errors).map((e) => e.message);
