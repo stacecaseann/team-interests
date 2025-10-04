@@ -5,12 +5,6 @@
     "description": "This API allows users to see our interests endpoints and add/update/delete if authenticated.",
     "version": "1.0.0"
   },
-  "tags": [
-    {
-      "name": "Speakers",
-      "description": "Operations related to Conference Speakers"
-    }
-  ],
   "host": "team-interests.onrender.com",
   "basePath": "/",
   "schemes": [
@@ -57,16 +51,142 @@
     },
     "/recipes/": {
       "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Gets all recipes.",
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "List of all recipes"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Creates a new recipe.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "recipe",
+            "in": "body",
+            "description": "The recipe to create.",
+            "schema": {
+              "$ref": "#/definitions/Recipe"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/recipes/{id}": {
+      "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Gets a recipe by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the recipe to retrieve."
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Updates a recipe by ID.",
+        "description": "Updates fields in the recipe. The ingredients and instructions will need the complete list in order to be updated correctly.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the recipe to update."
+          },
+          {
+            "name": "recipe",
+            "in": "body",
+            "description": "The recipe data to update.",
+            "schema": {
+              "$ref": "#/definitions/Recipe"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Deletes a recipe by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the recipe to delete."
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/recipes/name/{recipeName}": {
+      "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Gets all recipes to match Name.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "recipeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the recipes to retrieve."
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
     },
     "/movies/": {
       "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Gets all movies.",
         "description": "",
         "responses": {
           "200": {
@@ -81,6 +201,10 @@
         }
       },
       "post": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Creates a new movie.",
         "description": "",
         "parameters": [
           {
@@ -129,6 +253,10 @@
     },
     "/movies/{id}": {
       "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Gets a movie by ID.",
         "description": "",
         "parameters": [
           {
@@ -154,6 +282,10 @@
         }
       },
       "put": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Updates a movie by ID.",
         "description": "",
         "parameters": [
           {
@@ -209,6 +341,10 @@
         }
       },
       "delete": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Deletes a movie by ID.",
         "description": "",
         "parameters": [
           {
@@ -236,8 +372,11 @@
     },
     "/speakers/": {
       "get": {
-        "tags": ["Speakers"],
-        "description": "Gets all speakers from the database",
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Gets all speakers.",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -251,8 +390,11 @@
         }
       },
       "post": {
-        "tags": ["Speakers"],
-        "description": "Creates a new speaker",
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Creates a new speaker.",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -267,10 +409,10 @@
                   "example": "any"
                 },
                 "age": {
-                  "example": 0
+                  "example": "any"
                 },
                 "birthYear": {
-                  "example": 1920
+                  "example": "any"
                 },
                 "quote": {
                   "example": "any"
@@ -294,8 +436,11 @@
     },
     "/speakers/{id}": {
       "get": {
-        "tags": ["Speakers"],
-        "description": "Gets a speaker by their ID",
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Gets a speaker by ID.",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -317,8 +462,11 @@
         }
       },
       "put": {
-        "tags": ["Speakers"],
-        "description": "Updates a speaker",
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Updates a speaker by ID.",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -329,15 +477,24 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": { "type": "string", "example": "any" },
-                "lastName": { "type": "string", "example": "any" },
-                "age": { "type": "number", "example": 0 },
-                "birthYear": { "type": "number", "example": 1920 },
-                "quote": { "type": "string", "example": "Any Quote" }
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
+                  "example": "any"
+                },
+                "age": {
+                  "example": "any"
+                },
+                "birthYear": {
+                  "example": "any"
+                },
+                "quote": {
+                  "example": "any"
+                }
               }
             }
           }
@@ -358,8 +515,11 @@
         }
       },
       "delete": {
-        "tags": ["Speakers"],
-        "description": "Deletes a speaker",
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Deletes a speaker by ID.",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -380,6 +540,363 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/favoritebooks/": {
+      "get": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "summary": "Get all favorite books",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "List of favorite books"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "summary": "Add a new favorite book",
+        "description": "",
+        "parameters": [
+          {
+            "name": "book",
+            "in": "body",
+            "description": "The book to create.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "author": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "year": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Book created"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/favoritebooks/{bookId}": {
+      "get": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "summary": "Get a favorite book by ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the book to retrieve."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A favorite book"
+          },
+          "404": {
+            "description": "Book not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "summary": "Update a favorite book by ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the book to update."
+          },
+          {
+            "name": "book",
+            "in": "body",
+            "description": "The book data to update.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "object"
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "author": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    },
+                    "year": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "example": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book updated"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "summary": "Delete a favorite book by ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the book to delete."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book deleted"
+          },
+          "404": {
+            "description": "Book not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/favoritebooks/createWithArray": {
+      "post": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "summary": "Add multiple favorite books from an array",
+        "description": "",
+        "parameters": [
+          {
+            "name": "books",
+            "in": "body",
+            "description": "Array of books to create.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "object"
+                    },
+                    "properties": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "string"
+                            }
+                          }
+                        },
+                        "author": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "string"
+                            }
+                          }
+                        },
+                        "year": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Books created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/favoritebooks/createWithList": {
+      "post": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "summary": "Add multiple favorite books from a list",
+        "description": "",
+        "parameters": [
+          {
+            "name": "books",
+            "in": "body",
+            "description": "List of books to create.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "object"
+                    },
+                    "properties": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "string"
+                            }
+                          }
+                        },
+                        "author": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "string"
+                            }
+                          }
+                        },
+                        "year": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "example": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Books created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }

@@ -34,7 +34,7 @@ const recipeSchema = new mongoose.Schema({
 
 //sample functions
 recipeSchema.methods.printDescription = function () {
-  console.log(`${this.name}: ${this.description}`);
+  return `${this.name}: ${this.description}`;
 };
 
 recipeSchema.statics.findByName = function (name) {
@@ -51,7 +51,7 @@ recipeSchema.pre('save', function (next) {
 });
 
 recipeSchema.post('save', function (doc, next) {
-  console.log('Recipe created/updated:', doc.printDescription());
+  console.log('Recipe created/updated:', doc.recipeDescription);
   next();
 });
 
