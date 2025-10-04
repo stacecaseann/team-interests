@@ -4,6 +4,7 @@ const recipeRoutes = require('./recipes');
 const userRoutes = require('./users');
 const movieRoutes = require('./movies');
 const speakerRoutes = require('./conferenceSpeakers');
+const favoriteBooksRoutes = require('./favoritebooks');
 
 // Swagger setup
 const swaggerUi = require('swagger-ui-express');
@@ -17,5 +18,6 @@ router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 router.use('/recipes', recipeRoutes);
 router.use('/movies', movieRoutes);
 router.use('/speakers', speakerRoutes);
+router.use('/favoritebooks', favoriteBooksRoutes);
 
 module.exports = router;
