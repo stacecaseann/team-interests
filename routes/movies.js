@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const asyncHandler = require('../middleware/asyncHandler');
+const { isAuthenticated } = require('../middleware/authentication');
 const movieController = require('../controllers/users/ovinson/movieController');
 const {
   validateObjectId,
@@ -15,12 +16,14 @@ router.get(
 );
 router.post(
   '/',
+  isAuthenticated,
   validateMovieData,
   handleValidationErrors,
   asyncHandler(movieController.createMovie),
 );
 router.put(
   '/:id',
+  isAuthenticated,
   validateObjectId,
   validateMovieData,
   handleValidationErrors,
@@ -28,6 +31,7 @@ router.put(
 );
 router.delete(
   '/:id',
+  isAuthenticated,
   validateObjectId,
   asyncHandler(movieController.deleteMovie),
 );

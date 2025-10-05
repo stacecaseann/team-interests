@@ -3,6 +3,7 @@ const homeRoutes = require('./home');
 const recipeRoutes = require('./recipes');
 const userRoutes = require('./users');
 const movieRoutes = require('./movies');
+const passport = require('passport');
 
 // Swagger setup
 const swaggerUi = require('swagger-ui-express');
@@ -16,5 +17,19 @@ router.use('/users', userRoutes);
 router.use('/recipes', recipeRoutes);
 router.use('/movies', movieRoutes);
 router.use('/speakers', require('./conferenceSpeakers'));
+router.get('/login', passport.authenticate('github'));
 
+router.get('/logout', function (req, res, next) {
+  req.session.destroy(function (err) {
+    if (err) {
+      return next(err);
+    }
+    console.log('You are logged out');
+    res.redirect('/');
+  });
+});
+
+router.get('/fckolob', (req, res) => {
+  res.json(req.session.user || { status: 'Not logged in' });
+});
 module.exports = router;
