@@ -5,12 +5,6 @@
     "description": "This API allows users to see our interests endpoints and add/update/delete if authenticated.",
     "version": "1.0.0"
   },
-  "tags": [
-    {
-      "name": "Speakers",
-      "description": "Operations related to Conference Speakers"
-    }
-  ],
   "host": "team-interests.onrender.com",
   "basePath": "/",
   "schemes": [
@@ -236,8 +230,7 @@
     },
     "/speakers/": {
       "get": {
-        "tags": ["Speakers"],
-        "description": "Gets all speakers from the database",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -251,8 +244,7 @@
         }
       },
       "post": {
-        "tags": ["Speakers"],
-        "description": "Creates a new speaker",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -267,10 +259,10 @@
                   "example": "any"
                 },
                 "age": {
-                  "example": 0
+                  "example": "any"
                 },
                 "birthYear": {
-                  "example": 1920
+                  "example": "any"
                 },
                 "quote": {
                   "example": "any"
@@ -294,8 +286,7 @@
     },
     "/speakers/{id}": {
       "get": {
-        "tags": ["Speakers"],
-        "description": "Gets a speaker by their ID",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -317,8 +308,7 @@
         }
       },
       "put": {
-        "tags": ["Speakers"],
-        "description": "Updates a speaker",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -329,15 +319,24 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": { "type": "string", "example": "any" },
-                "lastName": { "type": "string", "example": "any" },
-                "age": { "type": "number", "example": 0 },
-                "birthYear": { "type": "number", "example": 1920 },
-                "quote": { "type": "string", "example": "Any Quote" }
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
+                  "example": "any"
+                },
+                "age": {
+                  "example": "any"
+                },
+                "birthYear": {
+                  "example": "any"
+                },
+                "quote": {
+                  "example": "any"
+                }
               }
             }
           }
@@ -358,8 +357,7 @@
         }
       },
       "delete": {
-        "tags": ["Speakers"],
-        "description": "Deletes a speaker",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -380,6 +378,144 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/favoritebooks/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "author": {
+                  "example": "any"
+                },
+                "year": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/favoritebooks/{bookId}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/favoritebooks/createWithArray": {
+      "post": {
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/favoritebooks/createWithList": {
+      "post": {
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
