@@ -384,33 +384,214 @@
     },
     "/favoritebooks/": {
       "get": {
-        "description": "",
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Get a list of all favorite books",
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
+            "description": "Favorite books retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "60d21b4667d0d8992e610c85"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Sample Book"
+                  },
+                  "author": {
+                    "type": "string",
+                    "example": "Author Name"
+                  },
+                  "year": {
+                    "type": "string",
+                    "example": "1999"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Add a new favorite book",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "description": "Favorite book data",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "title": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "The Pragmatic Programmer"
                 },
                 "author": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Andrew Hunt"
                 },
                 "year": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "1999"
+                }
+              },
+              "required": [
+                "title",
+                "author",
+                "year"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Book created successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          }
+        }
+      }
+    },
+    "/favoritebooks/{bookId}": {
+      "get": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Get a favorite book by ID",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Favorite Book ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Favorite book retrieved successfully"
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Update an existing favorite book",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Favorite Book ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated favorite book data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Updated Title"
+                },
+                "author": {
+                  "type": "string",
+                  "example": "Updated Author"
+                },
+                "year": {
+                  "type": "string",
+                  "example": "2022"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book updated successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Delete a favorite book by ID",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Favorite Book ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book deleted successfully"
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        }
+      }
+    },
+    "/favoritebooks/createWithArray": {
+      "post": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Add multiple favorite books at once",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Array of favorite books",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "Book 2"
+                  },
+                  "author": {
+                    "type": "string",
+                    "example": "Author 2"
+                  },
+                  "year": {
+                    "type": "string",
+                    "example": "2021"
+                  }
                 }
               }
             }
@@ -418,104 +599,54 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Books created successfully"
           },
           "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/favoritebooks/{bookId}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "bookId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "bookId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "bookId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/favoritebooks/createWithArray": {
-      "post": {
-        "description": "",
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
+            "description": "Validation error"
           }
         }
       }
     },
     "/favoritebooks/createWithList": {
       "post": {
-        "description": "",
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Add multiple favorite books at once (list)",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "List of favorite books",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "Book 2"
+                  },
+                  "author": {
+                    "type": "string",
+                    "example": "Author 2"
+                  },
+                  "year": {
+                    "type": "string",
+                    "example": "2021"
+                  }
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Books created successfully"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Validation error"
           }
         }
       }
