@@ -12,7 +12,7 @@ POST http://localhost:3000/recipes
 Content-Type: application/json  
 
 {
-  "name": "Beef Tacos",
+  "name": "Beef Tacos2",
   "serves": 4,
   "description": "Seasoned ground beef served in crispy taco shells with fresh toppings.",
   "ingredients": [
@@ -65,4 +65,4 @@ Content-Type: application/json
 }
 
 ### Delete a recipe by ID
-DELETE http://localhost:3000/recipes/68e196cfd362d12ccafd6f1c
+DELETE http://localhost:3000/recipes/68e291149cfb4d0f1873a1aa

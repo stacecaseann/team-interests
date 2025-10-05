@@ -4,19 +4,19 @@ const asyncHandler = require('../middleware/asyncHandler');
 const validation = require('../middleware/validation');
 const recipeController = require('../controllers/recipeController');
 
-router.get('/', asyncHandler(recipeController.getAllRecipes));
+router.get('/', recipeController.getAllRecipes);
 
 router.get(
   '/:id',
   validation.validateObjectId,
   validation.handleValidationErrors,
-  asyncHandler(recipeController.getRecipeById),
+  recipeController.getRecipeById,
 );
 
 router.get(
   '/name/:recipeName',
   validation.handleValidationErrors,
-  asyncHandler(recipeController.getRecipesByName),
+  recipeController.getRecipesByName,
 );
 
 router.post(
@@ -24,7 +24,7 @@ router.post(
   validation.validateRecipeRules,
   validation.validateRecipeNameRules,
   validation.handleValidationErrors,
-  asyncHandler(recipeController.createRecipe),
+  recipeController.createRecipe,
 );
 
 router.put(
@@ -32,14 +32,14 @@ router.put(
   validation.validateObjectId,
   validation.validateRecipeUpdateRules,
   validation.handleValidationErrors,
-  asyncHandler(recipeController.updateRecipe),
+  recipeController.updateRecipe,
 );
 
 router.delete(
   '/:id',
   validation.validateObjectId,
   validation.handleValidationErrors,
-  asyncHandler(recipeController.deleteRecipe),
+  recipeController.deleteRecipe,
 );
 
 module.exports = router;

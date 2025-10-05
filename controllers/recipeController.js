@@ -2,9 +2,11 @@ const recipeModel = require('../database/models/recipeModel');
 
 // Controller function to get all recipes
 const getAllRecipes = async (req, res) => {
-  // #swagger.tags = ['Recipes']
-  // #swagger.summary = 'Gets all recipes.'
-  // #swagger.responses[200] = { description: 'List of all recipes' }
+  /* GET all recipes
+      #swagger.tags = ["Recipes"]
+      #swagger.summary = "Gets all recipes."
+      #swagger.responses[200] = { description: "List of all recipes" }
+  */
   try {
     const recipes = await recipeModel.getAllRecipes();
     res.status(200).json(recipes);
@@ -14,9 +16,11 @@ const getAllRecipes = async (req, res) => {
 };
 
 const getRecipeById = async (req, res) => {
-  //#swagger.tags = ['Recipes']
-  //#swagger.summary = 'Gets a recipe by ID.'
-  //#swagger.parameters['id'] = { description: 'The ID of the recipe to retrieve.' }
+  /* GET recipe by ID
+      #swagger.tags = ["Recipes"]
+      #swagger.summary = "Gets a recipe by ID."
+      #swagger.parameters['id'] = { description: 'The ID of the recipe to retrieve.' }
+  */
   try {
     const result = await recipeModel.getRecipeById(req.params.id);
     res.setHeader('Content-Type', 'application/json');
@@ -27,9 +31,11 @@ const getRecipeById = async (req, res) => {
 };
 
 const getRecipesByName = async (req, res) => {
-  //#swagger.tags = ['Recipes']
-  //#swagger.summary = 'Gets all recipes to match Name.'
-  //#swagger.parameters['recipeName'] = { description: 'The name of the recipes to retrieve.' }
+  /* GET recipes by name
+      #swagger.tags = ["Recipes"]
+      #swagger.summary = "Gets all recipes to match Name."
+      #swagger.parameters['recipeName'] = { description: 'The name of the recipes to retrieve.' }
+  */
   try {
     const result = await recipeModel.getRecipesByName(req.params.recipeName);
     res.setHeader('Content-Type', 'application/json');
@@ -40,9 +46,14 @@ const getRecipesByName = async (req, res) => {
 };
 
 const createRecipe = async (req, res) => {
-  //#swagger.tags = ['Recipes']
-  //#swagger.summary = 'Creates a new recipe.'
-  //#swagger.parameters['recipe'] = { in: 'body', description: 'The recipe to create.', schema: { $ref: "#/definitions/Recipe" } }
+  /* CREATE a new recipe
+      #swagger.tags = ["Recipes"]
+      #swagger.summary = "Creates a new recipe."
+      #swagger.parameters['recipe'] = { 
+        in: 'body', 
+        description: 'The recipe to create.'
+      }
+  */
   try {
     const result = await recipeModel.createRecipe(req.body);
     res.setHeader('Content-Type', 'application/json');
@@ -55,11 +66,13 @@ const createRecipe = async (req, res) => {
 };
 
 const updateRecipe = async (req, res) => {
-  //#swagger.tags = ['Recipes']
-  //#swagger.summary = 'Updates a recipe by ID.'
-  //#swagger.description = 'Updates fields in the recipe. The ingredients and instructions will need the complete list in order to be updated correctly.'
-  //#swagger.parameters['id'] = { description: 'The ID of the recipe to update.' }
-  //#swagger.parameters['recipe'] = { in: 'body', description: 'The recipe data to update.', schema: { $ref: "#/definitions/Recipe" } }
+  /* UPDATE recipe by ID
+      #swagger.tags = ["Recipes"]
+      #swagger.summary = "Updates a recipe by ID."
+      #swagger.description = "Updates fields in the recipe. The ingredients and instructions will need the complete list in order to be updated correctly."      #swagger.parameters['recipe'] = { in: 'body', description: 'The recipe data to update.' }
+      #swagger.parameters['id'] = { description: 'The ID of the recipe to update.' }
+
+  */
   try {
     const result = await recipeModel.updateRecipe(req.params.id, req.body);
     res.setHeader('Content-Type', 'application/json');
@@ -72,9 +85,11 @@ const updateRecipe = async (req, res) => {
 };
 
 const deleteRecipe = async (req, res) => {
-  //#swagger.tags = ['Recipes']
-  //#swagger.summary = 'Deletes a recipe by ID.'
-  //#swagger.parameters['id'] = { description: 'The ID of the recipe to delete.' }
+  /* DELETE recipe by ID
+      #swagger.tags = ["Recipes"]
+      #swagger.summary = "Deletes a recipe by ID."
+      #swagger.parameters['id'] = { description: 'The ID of the recipe to delete.' }
+  */
   try {
     const result = await recipeModel.deleteRecipe(req.params.id);
     res.setHeader('Content-Type', 'application/json');
