@@ -7,8 +7,6 @@ const {
   handleValidationErrors,
 } = require('../middleware/validation');
 
-// #swagger.tags = ['Movies']
-// #swagger.description = 'Endpoint to manage movies.'
 router.get('/', movieController.getMovies);
 
 router.get('/:id', validateObjectId, movieController.getMovieById);

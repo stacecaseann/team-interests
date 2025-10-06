@@ -2,7 +2,7 @@ const FavoriteBook = require('../schemas/favoriteBook');
 
 // GET /favoritebooks
 const getAllBooks = async (req, res, next) => {
-    /* GET all favorite books
+  /* GET all favorite books
       #swagger.tags = ["FavoriteBooks"]
       #swagger.description = "Get a list of all favorite books"
       #swagger.responses[200] = {
@@ -17,17 +17,17 @@ const getAllBooks = async (req, res, next) => {
         ]
       }
     */
-    try {
-        const books = await FavoriteBook.find();
-        res.json(books);
-    } catch (err) {
-        next(err);
-    }
+  try {
+    const books = await FavoriteBook.find();
+    res.json(books);
+  } catch (err) {
+    next(err);
+  }
 };
 
 // GET /favoritebooks/:bookId
 const getBookById = async (req, res, next) => {
-    /* GET single favorite book by ID
+  /* GET single favorite book by ID
       #swagger.tags = ["FavoriteBooks"]
       #swagger.description = "Get a favorite book by ID"
       #swagger.parameters["bookId"] = {
@@ -39,18 +39,18 @@ const getBookById = async (req, res, next) => {
       #swagger.responses[200] = { description: "Favorite book retrieved successfully" }
       #swagger.responses[404] = { description: "Book not found" }
     */
-    try {
-        const book = await FavoriteBook.findById(req.params.bookId);
-        if (!book) return res.status(404).json({ error: 'Book not found' });
-        res.json(book);
-    } catch (err) {
-        next(err);
-    }
+  try {
+    const book = await FavoriteBook.findById(req.params.bookId);
+    if (!book) return res.status(404).json({ error: 'Book not found' });
+    res.json(book);
+  } catch (err) {
+    next(err);
+  }
 };
 
 // POST /favoritebooks
 const addBook = async (req, res, next) => {
-    /* CREATE new favorite book
+  /* CREATE new favorite book
       #swagger.tags = ["FavoriteBooks"]
       #swagger.description = "Add a new favorite book"
       #swagger.parameters["body"] = {
@@ -66,19 +66,19 @@ const addBook = async (req, res, next) => {
       #swagger.responses[201] = { description: "Book created successfully" }
       #swagger.responses[400] = { description: "Validation error" }
     */
-    try {
-        const { title, author, year } = req.body;
-        const book = new FavoriteBook({ title, author, year });
-        const saved = await book.save();
-        res.status(201).json(saved);
-    } catch (err) {
-        next(err);
-    }
+  try {
+    const { title, author, year } = req.body;
+    const book = new FavoriteBook({ title, author, year });
+    const saved = await book.save();
+    res.status(201).json(saved);
+  } catch (err) {
+    next(err);
+  }
 };
 
 // POST /favoritebooks/createWithArray
 const createWithArray = async (req, res, next) => {
-    /* CREATE multiple favorite books from array
+  /* CREATE multiple favorite books from array
       #swagger.tags = ["FavoriteBooks"]
       #swagger.description = "Add multiple favorite books at once"
       #swagger.parameters["body"] = {
@@ -93,17 +93,17 @@ const createWithArray = async (req, res, next) => {
       #swagger.responses[201] = { description: "Books created successfully" }
       #swagger.responses[400] = { description: "Validation error" }
     */
-    try {
-        const saved = await FavoriteBook.insertMany(req.body);
-        res.status(201).json(saved);
-    } catch (err) {
-        next(err);
-    }
+  try {
+    const saved = await FavoriteBook.insertMany(req.body);
+    res.status(201).json(saved);
+  } catch (err) {
+    next(err);
+  }
 };
 
 // POST /favoritebooks/createWithList
 const createWithList = async (req, res, next) => {
-    /* CREATE multiple favorite books from list
+  /* CREATE multiple favorite books from list
       #swagger.tags = ["FavoriteBooks"]
       #swagger.description = "Add multiple favorite books at once (list)"
       #swagger.parameters["body"] = {
@@ -118,17 +118,17 @@ const createWithList = async (req, res, next) => {
       #swagger.responses[201] = { description: "Books created successfully" }
       #swagger.responses[400] = { description: "Validation error" }
     */
-    try {
-        const saved = await FavoriteBook.insertMany(req.body);
-        res.status(201).json(saved);
-    } catch (err) {
-        next(err);
-    }
+  try {
+    const saved = await FavoriteBook.insertMany(req.body);
+    res.status(201).json(saved);
+  } catch (err) {
+    next(err);
+  }
 };
 
 // PUT /favoritebooks/:bookId
 const updateBook = async (req, res, next) => {
-    /* UPDATE favorite book by ID
+  /* UPDATE favorite book by ID
       #swagger.tags = ["FavoriteBooks"]
       #swagger.description = "Update an existing favorite book"
       #swagger.parameters["bookId"] = {
@@ -151,22 +151,22 @@ const updateBook = async (req, res, next) => {
       #swagger.responses[400] = { description: "Validation error" }
       #swagger.responses[404] = { description: "Book not found" }
     */
-    try {
-        const updated = await FavoriteBook.findByIdAndUpdate(
-            req.params.bookId,
-            req.body,
-            { new: true }
-        );
-        if (!updated) return res.status(404).json({ error: 'Book not found' });
-        res.json(updated);
-    } catch (err) {
-        next(err);
-    }
+  try {
+    const updated = await FavoriteBook.findByIdAndUpdate(
+      req.params.bookId,
+      req.body,
+      { new: true },
+    );
+    if (!updated) return res.status(404).json({ error: 'Book not found' });
+    res.json(updated);
+  } catch (err) {
+    next(err);
+  }
 };
 
 // DELETE /favoritebooks/:bookId
 const deleteBook = async (req, res, next) => {
-    /* DELETE favorite book by ID
+  /* DELETE favorite book by ID
       #swagger.tags = ["FavoriteBooks"]
       #swagger.description = "Delete a favorite book by ID"
       #swagger.parameters["bookId"] = {
@@ -178,21 +178,21 @@ const deleteBook = async (req, res, next) => {
       #swagger.responses[200] = { description: "Book deleted successfully" }
       #swagger.responses[404] = { description: "Book not found" }
     */
-    try {
-        const deleted = await FavoriteBook.findByIdAndDelete(req.params.bookId);
-        if (!deleted) return res.status(404).json({ error: 'Book not found' });
-        res.json({ message: 'Book deleted' });
-    } catch (err) {
-        next(err);
-    }
+  try {
+    const deleted = await FavoriteBook.findByIdAndDelete(req.params.bookId);
+    if (!deleted) return res.status(404).json({ error: 'Book not found' });
+    res.json({ message: 'Book deleted' });
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = {
-    getAllBooks,
-    getBookById,
-    addBook,
-    createWithArray,
-    createWithList,
-    updateBook,
-    deleteBook
+  getAllBooks,
+  getBookById,
+  addBook,
+  createWithArray,
+  createWithList,
+  updateBook,
+  deleteBook,
 };

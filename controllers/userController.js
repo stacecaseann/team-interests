@@ -1,4 +1,6 @@
 const displayUsers = (_req, res) => {
+  //#swagger.tags = ['Users']
+  //#swagger.summary = 'Displays a list of users.'
   try {
     res.send(
       `<h1>Users and their Interests</h1>

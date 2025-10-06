@@ -1,0 +1,68 @@
+### Get all recipes
+GET http://localhost:3000/recipes
+
+### Get recipe by ID
+GET http://localhost:3000/recipes/68e196cfd362d12ccafd6f1c
+
+### Get recipes by name
+GET http://localhost:3000/recipes/name/Grilled%20Cheese%20Sandwich
+
+### Create a new recipe
+POST http://localhost:3000/recipes
+Content-Type: application/json  
+
+{
+  "name": "Beef Tacos2",
+  "serves": 4,
+  "description": "Seasoned ground beef served in crispy taco shells with fresh toppings.",
+  "ingredients": [
+    { "amount": 1, "amountString": "1", "measurementDescription": "pound", "measurement": "lb", "ingredient": "ground beef" },
+    { "amount": 1, "amountString": "1", "measurementDescription": "packet", "measurement": "unit", "ingredient": "taco seasoning" },
+    { "amount": 0.5, "amountString": "1/2", "measurementDescription": "cup", "measurement": "cup", "ingredient": "water" },
+    { "amount": 8, "amountString": "8", "measurementDescription": "unit", "measurement": "unit", "ingredient": "taco shells" },
+    { "amount": 1, "amountString": "1", "measurementDescription": "cup", "measurement": "cup", "ingredient": "shredded lettuce" },
+    { "amount": 1, "amountString": "1", "measurementDescription": "cup", "measurement": "cup", "ingredient": "cheddar cheese", "ingredientDescription": "shredded" },
+    { "amount": 1, "amountString": "1", "measurementDescription": "unit", "measurement": "unit", "ingredient": "tomato", "ingredientDescription": "diced" },
+    { "amount": 0.5, "amountString": "1/2", "measurementDescription": "cup", "measurement": "cup", "ingredient": "sour cream" },
+    { "amount": 0.25, "amountString": "1/4", "measurementDescription": "cup", "measurement": "cup", "ingredient": "salsa" }
+  ],
+  "instructions": [
+    { "stepNumber": 1, "instruction": "In a skillet over medium heat, cook ground beef until browned. Drain excess fat." },
+    { "stepNumber": 2, "instruction": "Add taco seasoning and water. Simmer for 5 minutes, stirring occasionally." },
+    { "stepNumber": 3, "instruction": "Warm taco shells according to package instructions." },
+    { "stepNumber": 4, "instruction": "Fill each taco shell with beef, lettuce, cheese, and diced tomato." },
+    { "stepNumber": 5, "instruction": "Top with sour cream and salsa. Serve immediately." }
+  ]
+}
+### Update a recipe by ID
+PUT http://localhost:3000/recipes/68e196cfd362d12ccafd6f1c
+Content-Type: application/json
+
+{
+  "name": "Chicken Parmesan",
+  "serves": 6,
+  "description": "Chicken over a plate of egg noodles.",
+  "ingredients": [
+    { "amount": 2, "amountString": "2", "measurementDescription": "unit", "measurement": "unit", "ingredient": "chicken breasts", "ingredientDescription": "boneless, skinless" },
+    { "amount": 1, "amountString": "1", "measurementDescription": "cup", "measurement": "cup", "ingredient": "breadcrumbs", "ingredientDescription": "Italian seasoned" },
+    { "amount": 0.5, "amountString": "1/2", "measurementDescription": "cup", "measurement": "cup", "ingredient": "Parmesan cheese", "ingredientDescription": "grated" },
+    { "amount": 2, "amountString": "2", "measurementDescription": "unit", "measurement": "unit", "ingredient": "eggs", "ingredientDescription": "beaten" },
+    { "amount": 1, "amountString": "1", "measurementDescription": "cup", "measurement": "cup", "ingredient": "marinara sauce" },
+    { "amount": 1, "amountString": "1", "measurementDescription": "cup", "measurement": "cup", "ingredient": "mozzarella cheese", "ingredientDescription": "shredded" },
+    { "amount": 2, "amountString": "2", "measurementDescription": "tablespoon", "measurement": "tbsp", "ingredient": "olive oil" },
+    { "amount": 0.25, "amountString": "1/4", "measurementDescription": "teaspoon", "measurement": "tsp", "ingredient": "black pepper" },
+    { "amount": 0.25, "amountString": "1/4", "measurementDescription": "teaspoon", "measurement": "tsp", "ingredient": "salt" }
+  ],
+  "instructions": [
+    { "stepNumber": 1, "instruction": "Preheat oven to 375°F (190°C)." },
+    { "stepNumber": 2, "instruction": "Mix breadcrumbs and Parmesan cheese in a shallow dish." },
+    { "stepNumber": 3, "instruction": "Dip chicken breasts in beaten eggs, then coat with breadcrumb mixture." },
+    { "stepNumber": 4, "instruction": "Heat olive oil in a skillet over medium heat. Cook chicken until golden brown on both sides." },
+    { "stepNumber": 5, "instruction": "Place chicken in a baking dish. Top each breast with marinara sauce and mozzarella cheese." },
+    { "stepNumber": 6, "instruction": "Bake for 20–25 minutes, until chicken is cooked through and cheese is bubbly." },
+    { "stepNumber": 7, "instruction": "Serve hot with pasta or a side salad." }
+  ]
+}
+
+### Delete a recipe by ID
+DELETE http://localhost:3000/recipes/68e291149cfb4d0f1873a1aa

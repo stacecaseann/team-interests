@@ -51,16 +51,192 @@
     },
     "/recipes/": {
       "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Gets all recipes.",
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "List of all recipes"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Creates a new recipe.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "recipe",
+            "in": "body",
+            "description": "The recipe to create.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/recipes/{id}": {
+      "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Gets a recipe by ID.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the recipe to retrieve."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Updates a recipe by ID.",
+        "description": "Updates fields in the recipe. The ingredients and instructions will need the complete list in order to be updated correctly.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the recipe to update."
+          },
+          {
+            "name": "recipe",
+            "in": "body",
+            "description": "The recipe data to update.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Deletes a recipe by ID.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the recipe to delete."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/recipes/name/{recipeName}": {
+      "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Gets all recipes to match Name.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "recipeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the recipes to retrieve."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/movies/": {
       "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Gets all movies.",
         "description": "",
         "responses": {
           "200": {
@@ -75,6 +251,10 @@
         }
       },
       "post": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Creates a new movie.",
         "description": "",
         "parameters": [
           {
@@ -123,6 +303,10 @@
     },
     "/movies/{id}": {
       "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Gets a movie by ID.",
         "description": "",
         "parameters": [
           {
@@ -148,6 +332,10 @@
         }
       },
       "put": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Updates a movie by ID.",
         "description": "",
         "parameters": [
           {
@@ -203,6 +391,10 @@
         }
       },
       "delete": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Deletes a movie by ID.",
         "description": "",
         "parameters": [
           {
@@ -230,6 +422,10 @@
     },
     "/speakers/": {
       "get": {
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Gets all speakers.",
         "description": "",
         "responses": {
           "200": {
@@ -244,6 +440,10 @@
         }
       },
       "post": {
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Creates a new speaker.",
         "description": "",
         "parameters": [
           {
@@ -286,6 +486,10 @@
     },
     "/speakers/{id}": {
       "get": {
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Gets a speaker by ID.",
         "description": "",
         "parameters": [
           {
@@ -308,6 +512,10 @@
         }
       },
       "put": {
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Updates a speaker by ID.",
         "description": "",
         "parameters": [
           {
@@ -357,6 +565,10 @@
         }
       },
       "delete": {
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Deletes a speaker by ID.",
         "description": "",
         "parameters": [
           {
