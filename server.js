@@ -49,7 +49,7 @@ app
     session({
       secret: 'secret',
       resave: false,
-      saveUninitialized: false,
+      saveUninitialized: true,
     }),
   )
 

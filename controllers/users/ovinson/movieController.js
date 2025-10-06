@@ -49,6 +49,7 @@ const createMovie = async (req, res) => {
         .status(400)
         .json({ error: 'Validation failed', details: validationErrors });
     }
+
     return res.status(500).json({ error: 'Failed to create movie' });
   }
 };

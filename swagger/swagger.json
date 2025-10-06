@@ -5,9 +5,9 @@
     "description": "This API allows users to see our interests endpoints and add/update/delete if authenticated.",
     "version": "1.0.0"
   },
-  "host": "team-interests.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": ["http"],
   "securityDefinitions": {
     "GitHubOAuth": {
       "type": "oauth2",
@@ -28,6 +28,23 @@
           "default": {
             "description": ""
           }
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "description": "Login using Github.",
+        "responses": {
+          "200":{ "description": "Success."},
+          "500":{ "description": "Internal Server Error."}
+        }
+      }
+    },"/logout": {
+      "get": {
+        "description": "Logout",
+        "responses": {
+          "200":{ "description": "Success."},
+          "500":{ "description": "Internal Server Error."}
         }
       }
     },
@@ -113,6 +130,7 @@
         "responses": {
           "201": { "description": "Created" },
           "400": { "description": "Bad Request" },
+          "481": {"description": "You have no access."},
           "500": { "description": "Internal Server Error" }
         }
       }
