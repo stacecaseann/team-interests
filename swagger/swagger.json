@@ -5,12 +5,42 @@
     "description": "This API allows users to see our interests endpoints and add/update/delete if authenticated.",
     "version": "1.0.0"
   },
-  "host": "team-interests.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
+    "/login": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/fckolob": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "description": "",
@@ -69,6 +99,7 @@
         "tags": [
           "Recipes"
         ],
+        
         "summary": "Creates a new recipe.",
         "description": "",
         "produces": [
@@ -91,6 +122,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "481": {
+            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -163,6 +197,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "481": {
+            "description": ""
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -192,6 +229,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "481": {
+            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -260,26 +300,22 @@
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "title": {
-                  "example": "any"
-                },
-                "director": {
-                  "example": "any"
-                },
-                "language": {
-                  "example": "any"
-                },
-                "year": {
-                  "example": "any"
-                },
+                "title": { "type": "string", "example": "Saints and Soldiers" },
+                "director": { "type": "string", "example": "Ryan Little" },
+                "language": { "type": "string", "example": "English" },
+                "year": { "type": "integer", "example": 2003 },
                 "genre": {
-                  "example": "any"
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "example": ["War Drama"]
                 },
                 "synopsis": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Set during World War II, the film follows a group of Allied soldiers, including an LDS soldier, as they struggle to survive behind enemy lines and deliver crucial intelligence."
                 }
               }
             }
@@ -294,6 +330,9 @@
           },
           "409": {
             "description": "Conflict"
+          },
+          "481": {
+            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -385,6 +424,9 @@
           "409": {
             "description": "Conflict"
           },
+          "481": {
+            "description": ""
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -413,6 +455,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "481": {
+            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -477,6 +522,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "481": {
+            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -559,6 +607,9 @@
           "404": {
             "description": "Not Found"
           },
+          "481": {
+            "description": ""
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -587,6 +638,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "481": {
+            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -630,6 +684,9 @@
                 "name": "main"
               }
             }
+          },
+          "481": {
+            "description": ""
           }
         }
       },
@@ -674,6 +731,9 @@
           },
           "400": {
             "description": "Validation error"
+          },
+          "481": {
+            "description": ""
           }
         }
       }
@@ -748,6 +808,9 @@
           },
           "404": {
             "description": "Book not found"
+          },
+          "481": {
+            "description": ""
           }
         }
       },
@@ -771,6 +834,9 @@
           },
           "404": {
             "description": "Book not found"
+          },
+          "481": {
+            "description": ""
           }
         }
       }
@@ -815,6 +881,9 @@
           },
           "400": {
             "description": "Validation error"
+          },
+          "481": {
+            "description": ""
           }
         }
       }
@@ -859,6 +928,9 @@
           },
           "400": {
             "description": "Validation error"
+          },
+          "481": {
+            "description": ""
           }
         }
       }

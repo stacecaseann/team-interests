@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const asyncHandler = require('../middleware/asyncHandler');
+
 const validation = require('../middleware/validation');
 const recipeController = require('../controllers/recipeController');
+const { isAuthenticated } = require('../middleware/authentication');
 
 router.get('/', recipeController.getAllRecipes);
 
@@ -21,6 +22,7 @@ router.get(
 
 router.post(
   '/',
+  isAuthenticated,
   validation.validateRecipeRules,
   validation.validateRecipeNameRules,
   validation.handleValidationErrors,
@@ -29,6 +31,7 @@ router.post(
 
 router.put(
   '/:id',
+  isAuthenticated,
   validation.validateObjectId,
   validation.validateRecipeUpdateRules,
   validation.handleValidationErrors,
@@ -37,6 +40,7 @@ router.put(
 
 router.delete(
   '/:id',
+  isAuthenticated,
   validation.validateObjectId,
   validation.handleValidationErrors,
   recipeController.deleteRecipe,

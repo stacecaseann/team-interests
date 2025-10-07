@@ -1,12 +1,21 @@
 const router = require('express').Router();
 const favoriteBooksController = require('../controllers/favoriteBooksController');
+const { isAuthenticated } = require('../middleware/authentication');
 
-router.get('/', favoriteBooksController.getAllBooks);
+router.get('/', isAuthenticated, favoriteBooksController.getAllBooks);
 router.get('/:bookId', favoriteBooksController.getBookById);
-router.post('/', favoriteBooksController.addBook);
-router.post('/createWithArray', favoriteBooksController.createWithArray);
-router.post('/createWithList', favoriteBooksController.createWithList);
-router.put('/:bookId', favoriteBooksController.updateBook);
-router.delete('/:bookId', favoriteBooksController.deleteBook);
+router.post('/', isAuthenticated, favoriteBooksController.addBook);
+router.post(
+  '/createWithArray',
+  isAuthenticated,
+  favoriteBooksController.createWithArray,
+);
+router.post(
+  '/createWithList',
+  isAuthenticated,
+  favoriteBooksController.createWithList,
+);
+router.put('/:bookId', isAuthenticated, favoriteBooksController.updateBook);
+router.delete('/:bookId', isAuthenticated, favoriteBooksController.deleteBook);
 
 module.exports = router;
