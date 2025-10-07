@@ -32,7 +32,7 @@ router.get('/logout', function (req, res, next) {
   });
 });
 
-router.get('/fckolob', (req, res) => {
+router.get('/status', (req, res) => {
   res.json(req.session.user || { status: 'Not logged in' });
 });
 
