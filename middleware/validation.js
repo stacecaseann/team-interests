@@ -80,6 +80,20 @@ const handleValidationErrors = (req, res, next) => {
   return next();
 };
 
+const validateBookData = [
+  body('title')
+    .notEmpty().withMessage('Title is required.')
+    .isString().withMessage('Title must be a string.')
+    .isLength({ min: 2, max: 70 }).withMessage('Title must be between 2 and 70 characters.'),
+  body('author')
+    .notEmpty().withMessage('Author is required.')
+    .isString().withMessage('Author must be a string.')
+    .isLength({ min: 2, max: 50 }).withMessage('Author must be between 2 and 50 characters.'),
+  body('year')
+    .notEmpty().withMessage('Year is required.')
+    .matches(/^\d{4}$/).withMessage('Year must be a 4-digit number.'),
+];
+
 module.exports = {
   validateObjectId,
   validateMovieData,
