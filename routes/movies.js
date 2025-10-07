@@ -23,8 +23,8 @@ router.post(
 router.put(
   '/:id',
   validateObjectId,
-  validateMovieData,
-  handleValidationErrors,
+  // validateMovieData,
+  // handleValidationErrors,
   movieController.updateMovie,
 );
 

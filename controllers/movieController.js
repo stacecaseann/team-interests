@@ -65,7 +65,7 @@ const updateMovie = async (req, res) => {
         genre: req.body.genre,
         synopsis: req.body.synopsis,
       },
-      { new: true },
+      { new: true, runValidators: true },
     );
     if (!result) {
       return res.status(404).json({ error: 'Movie not found' });
