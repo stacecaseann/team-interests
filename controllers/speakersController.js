@@ -2,6 +2,8 @@ const { default: mongoose } = require('mongoose');
 const Speaker = require('../schemas/SpeakerSchema');
 
 const getAllSpeakers = async (req, res) => {
+  //#swagger.tags = ['Speakers']
+  //#swagger.summary = 'Gets all speakers.'
   try {
     const result = await Speaker.find();
     if (result.length === 0) {
@@ -16,6 +18,8 @@ const getAllSpeakers = async (req, res) => {
 };
 
 const getSpeaker = async (req, res) => {
+  //#swagger.tags = ['Speakers']
+  //#swagger.summary = 'Gets a speaker by ID.'
   const { id } = req.params;
   try {
     const result = await Speaker.findById(id);
@@ -31,6 +35,8 @@ const getSpeaker = async (req, res) => {
 };
 
 const createSpeaker = async (req, res) => {
+  //#swagger.tags = ['Speakers']
+  //#swagger.summary = 'Creates a new speaker.'
   try {
     const result = new Speaker({
       firstName: req.body.firstName,
@@ -55,21 +61,36 @@ const createSpeaker = async (req, res) => {
 };
 
 const updateSpeaker = async (req, res) => {
-  const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: 'You passed in an invalid ID' });
-  }
+  //#swagger.tags = ['Speakers']
+  //#swagger.summary = 'Updates a speaker by ID.'
   try {
-    const result = await Speaker.findByIdAndUpdate(id, req.body, {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'You passed in an invalid ID' });
+    }
+
+    const speakerData = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      age: req.body.age,
+      birthYear: req.body.birthYear,
+      quote: req.body.quote,
+    };
+
+    const result = await Speaker.findByIdAndUpdate(id, speakerData, {
       new: true,
       runValidators: true,
       context: 'query',
     });
+
     if (!result) {
       return res.status(404).json({ error: 'Your speaker was not found' });
     }
 
-    return res.status(200).json(result);
+    return res.status(200).json({
+      message: 'Your speaker was updated!',
+      updatedSpeaker: result,
+    });
   } catch (error) {
     if (error.name === 'ValidationError') {
       const message = Object.values(error.errors).map((e) => e.message);
@@ -84,6 +105,8 @@ const updateSpeaker = async (req, res) => {
 };
 
 const deleteSpeaker = async (req, res) => {
+  //#swagger.tags = ['Speakers']
+  //#swagger.summary = 'Deletes a speaker by ID.'
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: 'You passed in an invalid ID' });

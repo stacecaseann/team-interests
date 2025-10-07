@@ -1,0 +1,87 @@
+# FavoriteBooks Routes tested with REST Client extension
+
+### Get all favorite books (online)
+GET https://team-interests.onrender.com/favoritebooks
+Accept: application/json
+
+### Get all favorite books (local)
+GET http://localhost:3000/favoritebooks
+Accept: application/json
+
+
+### Get a favorite book by ID (online)
+GET https://team-interests.onrender.com/favoritebooks/68e18214d1a8be7d4747caf9
+Accept: application/json
+
+### Get a favorite book by ID (local)
+GET http://localhost:3000/favoritebooks/68e18214d1a8be7d4747caf9
+Accept: application/json
+
+
+### Create a new favorite book (online)
+POST https://team-interests.onrender.com/favoritebooks
+Content-Type: application/json
+
+{
+  "title": "The Pragmatic Programmer",
+  "author": "Andrew Hunt",
+  "year": 1999
+}
+
+### Create a new favorite book (local)
+POST http://localhost:3000/favoritebooks
+Content-Type: application/json
+
+{
+  "title": "Teachings of the Prophet Joseph Smith",
+  "author": "Joseph Fielding Smith (editor)",
+  "year": 1938
+}
+
+
+### Update a favorite book by ID (online)
+PUT https://team-interests.onrender.com/favoritebooks/68e18214d1a8be7d4747caf9
+Content-Type: application/json
+
+{
+  "title": "The Pragmatic Programmer (Updated Edition)",
+  "author": "Andrew Hunt & David Thomas",
+  "year": 2019
+}
+
+### Update a favorite book by ID (local)
+PUT http://localhost:3000/favoritebooks/68e18214d1a8be7d4747caf9
+Content-Type: application/json
+
+{
+  "title": "Jesus The Christ",
+  "author": "Andrew Hunt & David Thomas",
+  "year": 2019
+}
+
+
+### Delete a favorite book by ID (online)
+DELETE https://team-interests.onrender.com/favoritebooks/68e18214d1a8be7d4747caf9
+
+### Delete a favorite book by ID (local)
+DELETE http://localhost:3000/favoritebooks/68e18214d1a8be7d4747caf9
+
+
+
+### Create multiple favorite books with Array (online)
+POST https://team-interests.onrender.com/favoritebooks/createWithArray
+Content-Type: application/json
+
+[
+  { "title": "Clean Code", "author": "Robert C. Martin", "year": 2008 },
+  { "title": "Refactoring", "author": "Martin Fowler", "year": 2018 }
+]
+
+### Create multiple favorite books with Array (local)
+POST http://localhost:3000/favoritebooks/createWithArray
+Content-Type: application/json
+
+[
+  { "title": "Clean Code", "author": "Robert C. Martin", "year": 2008 },
+  { "title": "Refactoring", "author": "Martin Fowler", "year": 2018 }
+]

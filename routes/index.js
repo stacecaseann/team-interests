@@ -4,6 +4,8 @@ const recipeRoutes = require('./recipes');
 const userRoutes = require('./users');
 const movieRoutes = require('./movies');
 const speakerRoutes = require('./conferenceSpeakers');
+const favoriteBooksRoutes = require('./favoritebooks');
+const passport = require('passport');
 
 // Swagger setup
 const swaggerUi = require('swagger-ui-express');
@@ -17,5 +19,21 @@ router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 router.use('/recipes', recipeRoutes);
 router.use('/movies', movieRoutes);
 router.use('/speakers', speakerRoutes);
+router.use('/favoritebooks', favoriteBooksRoutes);
+router.get('/login', passport.authenticate('github'));
+
+router.get('/logout', function (req, res, next) {
+  req.session.destroy(function (err) {
+    if (err) {
+      return next(err);
+    }
+    console.log('You are logged out');
+    res.redirect('/');
+  });
+});
+
+router.get('/status', (req, res) => {
+  res.json(req.session.user || { status: 'Not logged in' });
+});
 
 module.exports = router;

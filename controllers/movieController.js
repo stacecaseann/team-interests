@@ -1,6 +1,8 @@
 const Movie = require('../schemas/MovieSchema');
 
 const getMovies = async (req, res) => {
+  //#swagger.tags = ['Movies']
+  //#swagger.summary = 'Gets all movies.'
   try {
     const result = await Movie.find();
     if (result.length === 0) {
@@ -13,6 +15,8 @@ const getMovies = async (req, res) => {
 };
 
 const getMovieById = async (req, res) => {
+  //#swagger.tags = ['Movies']
+  //#swagger.summary = 'Gets a movie by ID.'
   const { id } = req.params;
   try {
     const result = await Movie.findById(id);
@@ -26,6 +30,8 @@ const getMovieById = async (req, res) => {
 };
 
 const createMovie = async (req, res) => {
+  //#swagger.tags = ['Movies']
+  //#swagger.summary = 'Creates a new movie.'
   try {
     const result = await Movie.create({
       title: req.body.title,
@@ -53,6 +59,8 @@ const createMovie = async (req, res) => {
 };
 
 const updateMovie = async (req, res) => {
+  //#swagger.tags = ['Movies']
+  //#swagger.summary = 'Updates a movie by ID.'
   const { id } = req.params;
   try {
     const result = await Movie.findByIdAndUpdate(
@@ -88,6 +96,8 @@ const updateMovie = async (req, res) => {
 };
 
 const deleteMovie = async (req, res) => {
+  //#swagger.tags = ['Movies']
+  //#swagger.summary = 'Deletes a movie by ID.'
   const { id } = req.params;
   try {
     const result = await Movie.findByIdAndDelete(id);
