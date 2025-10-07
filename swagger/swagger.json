@@ -5,10 +5,10 @@
     "description": "This API allows users to see our interests endpoints and add/update/delete if authenticated.",
     "version": "1.0.0"
   },
-  "host": "team-interests.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/": {
@@ -485,6 +485,9 @@
           "200": {
             "description": "Favorite book retrieved successfully"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "404": {
             "description": "Book not found"
           }
@@ -556,6 +559,9 @@
         "responses": {
           "200": {
             "description": "Book deleted successfully"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "404": {
             "description": "Book not found"

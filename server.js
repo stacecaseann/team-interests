@@ -7,9 +7,12 @@ const mongodb = require('./database/connect');
 const cors = require('cors');
 const PORT = process.env.PORT;
 const mainRoute = require('./routes/index');
+const runSwagger = require('./swagger/swagger');
+runSwagger();
 
 // Middleware to parse JSON bodies - replaces body-parser so I deleted it from package.json
 app.use(express.json());
+app.use(cors());
 
 // Global error handling for uncaught exceptions
 process.on('uncaughtException', (err, origin) => {
