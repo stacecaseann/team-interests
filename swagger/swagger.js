@@ -8,8 +8,8 @@ const doc = {
     description:
       'This API allows users to see our interests endpoints and add/update/delete if authenticated.',
   },
-  host: 'team-interests.onrender.com',
-  schemes: ['https'],
+  host: process.env.SWAGGER_HOST || 'localhost:3000',
+  schemes: [process.env.SWAGGER_SCHEME || 'http'],
 };
 
 const outputFile = './swagger.json';
