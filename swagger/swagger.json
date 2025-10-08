@@ -5,10 +5,14 @@
     "description": "This API allows users to see our interests endpoints and add/update/delete if authenticated.",
     "version": "1.0.0"
   },
-  "host": "team-interests.onrender.com",
+  "host": [
+    "team-interests.onrender.com",
+    "localhost:3000"
+  ],
   "basePath": "/",
   "schemes": [
-    "https"
+    "https",
+    "http"
   ],
   "paths": {
     "/login": {
@@ -299,23 +303,27 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "title": { "type": "string", "example": "Saints and Soldiers" },
-                "director": { "type": "string", "example": "Ryan Little" },
-                "language": { "type": "string", "example": "English" },
-                "year": { "type": "integer", "example": 2003 },  
-              "genre": {
-                  "type": "array",
-                  "items": { "type": "string" },
-                  "example": ["War Drama"]
-                  },
-                  "synopsis": {
-                  "type": "string",
-                  "example": "Set during World War II, the film follows a group of Allied soldiers, including an LDS soldier, as they struggle to survive behind enemy lines and deliver crucial intelligence."
-            }
+                "title": {
+                  "example": "any"
+                },
+                "director": {
+                  "example": "any"
+                },
+                "language": {
+                  "example": "any"
+                },
+                "year": {
+                  "example": "any"
+                },
+                "genre": {
+                  "example": "any"
+                },
+                "synopsis": {
+                  "example": "any"
+                }
               }
             }
           }

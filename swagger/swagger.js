@@ -1,6 +1,6 @@
-// Moved swagger-autogen dependency from devDependencies to dependencies in package.json
-// to ensure it's available in all environments
 const swaggerAutogen = require('swagger-autogen')();
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 const doc = {
   info: {
@@ -8,17 +8,24 @@ const doc = {
     description:
       'This API allows users to see our interests endpoints and add/update/delete if authenticated.',
   },
-  host: process.env.SWAGGER_HOST || 'team-interests.onrender.com', // ✅ no https://
-  schemes: [process.env.SWAGGER_SCHEME || 'https'],
+  host: ['team-interests.onrender.com', 'localhost:3000'],
+  basePath: '/',
+  schemes: ['https', 'http'], //
 };
 
 const outputFile = './swagger.json';
 const endpoints = ['../routes/index.js'];
 
-swaggerAutogen(outputFile, endpoints, doc)
-  .then(() => {
-    console.log('Swagger documentation generated successfully.');
-  })
-  .catch((err) => {
-    console.error('Error generating Swagger documentation:', err);
-  });
+const runSwagger = async () => {
+  try {
+    await swaggerAutogen(outputFile, endpoints, doc);
+    console.log('✅ Swagger documentation generated successfully.');
+  } catch (err) {
+    console.error('❌ Error generating Swagger documentation:', err);
+  }
+};
+
+if (require.main === module) {
+  runSwagger();
+}
+module.exports = runSwagger;
