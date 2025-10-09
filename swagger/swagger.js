@@ -8,12 +8,12 @@ const doc = {
     description:
       'This API allows users to see our interests endpoints and add/update/delete if authenticated.',
   },
-  host: 'team-interests.onrender.com',
-  schemes: ['https'],
+  host: process.env.SWAGGER_HOST || 'team-interests.onrender.com', // ✅ no https://
+  schemes: [process.env.SWAGGER_SCHEME || 'https'],
 };
 
 const outputFile = './swagger.json';
-const endpoints = ['./routes/index.js'];
+const endpoints = ['../routes/index.js'];
 
 swaggerAutogen(outputFile, endpoints, doc)
   .then(() => {

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { body, validationResult } = require('express-validator');
 const { ObjectId } = mongoose.Types;
+const Recipe = require('../schemas/RecipeSchema');
 
 const validateObjectId = (req, res, next) => {
   const id = req.params._id || req.params.id;
@@ -56,6 +57,127 @@ const validateMovieData = [
     .withMessage('Synopsis must be between 10 and 300 characters.'),
 ];
 
+const validateRecipeRules = [
+  body('name')
+    .isString()
+    .withMessage('Name must be a string')
+    .notEmpty()
+    .withMessage('Name is required'),
+  body('serves')
+    .isInt({ min: 1 })
+    .withMessage('Serves must be an integer greater than 0')
+    .notEmpty()
+    .withMessage('Serves is required'),
+  body('description')
+    .optional()
+    .isString()
+    .withMessage('Description must be a string'),
+  body('ingredients')
+    .isArray({ min: 1 })
+    .withMessage('Ingredients must be a non-empty array'),
+  body('ingredients.*.amount')
+    .isFloat({ gt: 0 })
+    .withMessage('Ingredient amount must be a number greater than 0')
+    .notEmpty()
+    .withMessage('Ingredient amount is required'),
+  body('ingredients.*.amountString')
+    .isString()
+    .withMessage('Ingredient amountString must be a string')
+    .notEmpty()
+    .withMessage('Ingredient amountString is required'),
+  body('ingredients.*.measurement')
+    .isString()
+    .withMessage('Ingredient measurement must be a string')
+    .notEmpty()
+    .withMessage('Ingredient measurement is required'),
+  body('ingredients.*.measurementDescription')
+    .optional()
+    .isString()
+    .withMessage('Ingredient measurementDescription must be a string'),
+  body('ingredients.*.ingredient')
+    .isString()
+    .withMessage('Ingredient name must be a string')
+    .notEmpty()
+    .withMessage('Ingredient name is required'),
+  body('ingredients.*.ingredientDescription')
+    .optional()
+    .isString()
+    .withMessage('Ingredient description must be a string'),
+  body('instructions')
+    .isArray({ min: 1 })
+    .withMessage('Instructions must be a non-empty array'),
+  body('instructions.*.stepNumber')
+    .isInt({ min: 1 })
+    .withMessage('Instruction stepNumber must be an integer greater than 0')
+    .notEmpty()
+    .withMessage('Step Number is required'),
+  body('instructions.*.instruction')
+    .isString()
+    .withMessage('Instruction must be a string')
+    .notEmpty()
+    .withMessage('Instruction is required'),
+];
+
+const validateRecipeUpdateRules = [
+  body('name').isString().withMessage('Name must be a string'),
+  body('serves')
+    .isInt({ min: 1 })
+    .withMessage('Serves must be an integer greater than 0'),
+  body('description').isString().withMessage('Description must be a string'),
+  body('ingredients')
+    .isArray({ min: 1 })
+    .withMessage('Ingredients must be a non-empty array'),
+  body('ingredients.*.amount')
+    .isFloat({ gt: 0 })
+    .withMessage('Ingredient amount must be a number greater than 0'),
+  body('ingredients.*.amountString')
+    .isString()
+    .withMessage('Ingredient amountString must be a string')
+    .notEmpty()
+    .withMessage('Ingredient amountString is required'),
+  body('ingredients.*.measurement')
+    .isString()
+    .withMessage('Ingredient measurement must be a string')
+    .notEmpty()
+    .withMessage('Ingredient measurement is required'),
+  body('ingredients.*.measurementDescription')
+    .optional()
+    .isString()
+    .withMessage('Ingredient measurementDescription must be a string'),
+  body('ingredients.*.ingredient')
+    .isString()
+    .withMessage('Ingredient name must be a string')
+    .notEmpty()
+    .withMessage('Ingredient name is required'),
+  body('ingredients.*.ingredientDescription')
+    .optional()
+    .isString()
+    .withMessage('Ingredient description must be a string'),
+  body('instructions')
+    .isArray({ min: 1 })
+    .withMessage('Instructions must be a non-empty array'),
+  body('instructions.*.stepNumber')
+    .isInt({ min: 1 })
+    .withMessage('Instruction stepNumber must be an integer greater than 0'),
+  body('instructions.*.instruction')
+    .isString()
+    .withMessage('Instruction must be a string'),
+];
+
+const validateRecipeNameRules = [
+  body('name')
+    .isString()
+    .withMessage('Recipe name must be a string')
+    .notEmpty()
+    .withMessage('Recipe name is required')
+    .custom(async (value) => {
+      const existing = await Recipe.findOne({ name: value });
+      if (existing) {
+        throw new Error('Recipe name already in use');
+      }
+    }),
+];
+
 const validateScriptureData = [
   body('book')
     .notEmpty()
@@ -94,6 +216,9 @@ const handleValidationErrors = (req, res, next) => {
 module.exports = {
   validateObjectId,
   validateMovieData,
+  validateRecipeRules,
+  validateRecipeUpdateRules,
+  validateRecipeNameRules,
   validateScriptureData,
   handleValidationErrors,
 };

@@ -5,18 +5,42 @@
     "description": "This API allows users to see our interests endpoints and add/update/delete if authenticated.",
     "version": "1.0.0"
   },
-  "tags": [
-    {
-      "name": "Speakers",
-      "description": "Operations related to Conference Speakers"
-    }
-  ],
   "host": "team-interests.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
   ],
   "paths": {
+    "/login": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "description": "",
@@ -57,16 +81,201 @@
     },
     "/recipes/": {
       "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Gets all recipes.",
         "description": "",
         "responses": {
-          "default": {
+          "200": {
+            "description": "List of all recipes"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Creates a new recipe.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "recipe",
+            "in": "body",
+            "description": "The recipe to create.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "481": {
             "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/recipes/{id}": {
+      "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Gets a recipe by ID.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the recipe to retrieve."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Updates a recipe by ID.",
+        "description": "Updates fields in the recipe. The ingredients and instructions will need the complete list in order to be updated correctly.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the recipe to update."
+          },
+          {
+            "name": "recipe",
+            "in": "body",
+            "description": "The recipe data to update.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Deletes a recipe by ID.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the recipe to delete."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/recipes/name/{recipeName}": {
+      "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Gets all recipes to match Name.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "recipeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the recipes to retrieve."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/movies/": {
       "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Gets all movies.",
         "description": "",
         "responses": {
           "200": {
@@ -81,32 +290,32 @@
         }
       },
       "post": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Creates a new movie.",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "title": {
-                  "example": "any"
-                },
-                "director": {
-                  "example": "any"
-                },
-                "language": {
-                  "example": "any"
-                },
-                "year": {
-                  "example": "any"
-                },
-                "genre": {
-                  "example": "any"
-                },
-                "synopsis": {
-                  "example": "any"
-                }
+                "title": { "type": "string", "example": "Saints and Soldiers" },
+                "director": { "type": "string", "example": "Ryan Little" },
+                "language": { "type": "string", "example": "English" },
+                "year": { "type": "integer", "example": 2003 },  
+              "genre": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "example": ["War Drama"]
+                  },
+                  "synopsis": {
+                  "type": "string",
+                  "example": "Set during World War II, the film follows a group of Allied soldiers, including an LDS soldier, as they struggle to survive behind enemy lines and deliver crucial intelligence."
+            }
               }
             }
           }
@@ -121,6 +330,9 @@
           "409": {
             "description": "Conflict"
           },
+          "481": {
+            "description": ""
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -129,6 +341,10 @@
     },
     "/movies/{id}": {
       "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Gets a movie by ID.",
         "description": "",
         "parameters": [
           {
@@ -154,6 +370,10 @@
         }
       },
       "put": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Updates a movie by ID.",
         "description": "",
         "parameters": [
           {
@@ -203,12 +423,19 @@
           "409": {
             "description": "Conflict"
           },
+          "481": {
+            "description": ""
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       },
       "delete": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Deletes a movie by ID.",
         "description": "",
         "parameters": [
           {
@@ -228,6 +455,9 @@
           "404": {
             "description": "Not Found"
           },
+          "481": {
+            "description": ""
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -236,8 +466,11 @@
     },
     "/speakers/": {
       "get": {
-        "tags": ["Speakers"],
-        "description": "Gets all speakers from the database",
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Gets all speakers.",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -251,8 +484,11 @@
         }
       },
       "post": {
-        "tags": ["Speakers"],
-        "description": "Creates a new speaker",
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Creates a new speaker.",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -267,10 +503,10 @@
                   "example": "any"
                 },
                 "age": {
-                  "example": 0
+                  "example": "any"
                 },
                 "birthYear": {
-                  "example": 1920
+                  "example": "any"
                 },
                 "quote": {
                   "example": "any"
@@ -286,6 +522,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "481": {
+            "description": ""
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -294,8 +533,11 @@
     },
     "/speakers/{id}": {
       "get": {
-        "tags": ["Speakers"],
-        "description": "Gets a speaker by their ID",
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Gets a speaker by ID.",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -317,8 +559,11 @@
         }
       },
       "put": {
-        "tags": ["Speakers"],
-        "description": "Updates a speaker",
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Updates a speaker by ID.",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -329,15 +574,24 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": { "type": "string", "example": "any" },
-                "lastName": { "type": "string", "example": "any" },
-                "age": { "type": "number", "example": 0 },
-                "birthYear": { "type": "number", "example": 1920 },
-                "quote": { "type": "string", "example": "Any Quote" }
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
+                  "example": "any"
+                },
+                "age": {
+                  "example": "any"
+                },
+                "birthYear": {
+                  "example": "any"
+                },
+                "quote": {
+                  "example": "any"
+                }
               }
             }
           }
@@ -352,14 +606,20 @@
           "404": {
             "description": "Not Found"
           },
+          "481": {
+            "description": ""
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       },
       "delete": {
-        "tags": ["Speakers"],
-        "description": "Deletes a speaker",
+        "tags": [
+          "Speakers"
+        ],
+        "summary": "Deletes a speaker by ID.",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -378,8 +638,298 @@
           "404": {
             "description": "Not Found"
           },
+          "481": {
+            "description": ""
+          },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/favoritebooks/": {
+      "get": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Get a list of all favorite books",
+        "responses": {
+          "200": {
+            "description": "Favorite books retrieved successfully",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "60d21b4667d0d8992e610c85"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Sample Book"
+                  },
+                  "author": {
+                    "type": "string",
+                    "example": "Author Name"
+                  },
+                  "year": {
+                    "type": "string",
+                    "example": "1999"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "481": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Add a new favorite book",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Favorite book data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "The Pragmatic Programmer"
+                },
+                "author": {
+                  "type": "string",
+                  "example": "Andrew Hunt"
+                },
+                "year": {
+                  "type": "string",
+                  "example": "1999"
+                }
+              },
+              "required": [
+                "title",
+                "author",
+                "year"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Book created successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "481": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/favoritebooks/{bookId}": {
+      "get": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Get a favorite book by ID",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Favorite Book ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Favorite book retrieved successfully"
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Update an existing favorite book",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Favorite Book ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated favorite book data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Updated Title"
+                },
+                "author": {
+                  "type": "string",
+                  "example": "Updated Author"
+                },
+                "year": {
+                  "type": "string",
+                  "example": "2022"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book updated successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "404": {
+            "description": "Book not found"
+          },
+          "481": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Delete a favorite book by ID",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Favorite Book ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book deleted successfully"
+          },
+          "404": {
+            "description": "Book not found"
+          },
+          "481": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/favoritebooks/createWithArray": {
+      "post": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Add multiple favorite books at once",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Array of favorite books",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "Book 2"
+                  },
+                  "author": {
+                    "type": "string",
+                    "example": "Author 2"
+                  },
+                  "year": {
+                    "type": "string",
+                    "example": "2021"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Books created successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "481": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/favoritebooks/createWithList": {
+      "post": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Add multiple favorite books at once (list)",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "List of favorite books",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "Book 2"
+                  },
+                  "author": {
+                    "type": "string",
+                    "example": "Author 2"
+                  },
+                  "year": {
+                    "type": "string",
+                    "example": "2021"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Books created successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "481": {
+            "description": ""
           }
         }
       }

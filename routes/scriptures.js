@@ -10,8 +10,6 @@ router.get('/', asyncHandler(scriptureController.getAllScriptures));
 
 router.get('/:id', 
     validate.validateObjectId,
-    validate.validateScriptureData,
-    validate.handleValidationErrors,
     asyncHandler(scriptureController.getScriptureById));
 
 router.post('/', 
@@ -20,13 +18,13 @@ router.post('/',
     asyncHandler(scriptureController.addScripture));
 
 router.put('/:id', 
-    // validateObjectId,
+    validate.validateObjectId,
     validate.validateScriptureData,
     validate.handleValidationErrors,
     asyncHandler(scriptureController.updateScripture));
 
 router.delete('/:id', 
-    // validateObjectId,
+    validate.validateObjectId,
     validate.handleValidationErrors,
     asyncHandler(scriptureController.deleteScripture));
 

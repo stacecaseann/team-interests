@@ -1,4 +1,6 @@
 const displayUsers = (_req, res) => {
+  //#swagger.tags = ['Users']
+  //#swagger.summary = 'Displays a list of users.'
   try {
     res.send(
       `<h1>Users and their Interests</h1>
@@ -7,6 +9,7 @@ const displayUsers = (_req, res) => {
             <li><a href='/users/fernando'>Fernando</a></li>
             <li><a href='/users/ovinson'>Ovinson</a></li>
             <li><a href='/users/cris'>Cris</a></li>
+            <li><a href='/users/edeli'>Edeli</a></li>
             </ul>`,
     );
   } catch (err) {
@@ -21,6 +24,7 @@ const getUser = (req, res) => {
     fernando: { interests: 'scriptures' },
     ovinson: { interests: 'movies' },
     cris: { interests: 'speakers' },
+    edeli: { interests: 'favoritebooks' },
   };
   const user = users[username];
   if (user) {
