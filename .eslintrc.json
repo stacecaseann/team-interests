@@ -4,13 +4,17 @@
     "plugin:node/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "import"],
   "parserOptions": {
     "ecmaVersion": 2021,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
     }
+  },
+  "env": {
+    "node": true,
+    "jest": true
   },
   "rules": {
     "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
@@ -19,6 +23,15 @@
       {
         "endOfLine": "auto"
       }    
-    ]
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.test.js", "**/tests/**/*.js"]
+      }
+    ],
+    "no-warning-comments": "off",
+    "capitalized-comments": "off",
+    "no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }]
   }
 }

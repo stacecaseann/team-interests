@@ -68,6 +68,7 @@ async function createRecipe(recipeData) {
   try {
     const recipe = await Recipe.create(recipeData);
     console.log('Recipe created:', recipe);
+    return recipe;
   } catch (err) {
     console.error('Error creating recipe:', err.message);
     throw err;
