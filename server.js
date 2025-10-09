@@ -14,7 +14,6 @@ const mainRoute = require('./routes/index');
 const runSwagger = require('./swagger/swagger');
 runSwagger();
 
-
 // Middleware to parse JSON bodies - replaces body-parser so I deleted it from package.json
 app.use(express.json());
 
