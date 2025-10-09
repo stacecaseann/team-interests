@@ -155,7 +155,7 @@ const updateBook = async (req, res, next) => {
     const updated = await FavoriteBook.findByIdAndUpdate(
       req.params.bookId,
       req.body,
-      { new: true }
+      { new: true },
     );
     if (!updated) return res.status(404).json({ error: 'Book not found' });
     res.json(updated);

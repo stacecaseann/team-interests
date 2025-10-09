@@ -1,16 +1,14 @@
 const swaggerAutogen = require('swagger-autogen')();
 
-const isProduction = process.env.NODE_ENV === 'production';
-
 const doc = {
   info: {
     title: 'Interests API',
     description:
       'This API allows users to see our interests endpoints and add/update/delete if authenticated.',
   },
-  host: ['team-interests.onrender.com', 'localhost:3000'],
+  host: 'team-interests.onrender.com',
   basePath: '/',
-  schemes: ['https', 'http'], //
+  schemes: ['https'],
 };
 
 const outputFile = './swagger.json';

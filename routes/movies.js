@@ -25,8 +25,8 @@ router.put(
   '/:id',
   isAuthenticated,
   validateObjectId,
-  validateMovieData,
-  handleValidationErrors,
+  // validateMovieData,
+  // handleValidationErrors,
   movieController.updateMovie,
 );
 
