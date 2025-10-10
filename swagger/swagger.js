@@ -12,7 +12,13 @@ const doc = {
 };
 
 const outputFile = './swagger.json';
-const endpoints = ['../routes/index.js'];
+const endpoints = [
+  './routes/users.js',
+  './routes/recipes.js',
+  './routes/movies.js',
+  './routes/conferenceSpeakers.js',
+  './routes/favoritebooks.js',
+]; // Exclude index.js and home.js to prevent circular dependency
 
 const runSwagger = async () => {
   // Skip swagger generation during tests

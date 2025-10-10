@@ -1,7 +1,8 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
+const { MongoMemoryServer } = require('mongodb-memory-server');
 const Recipe = require('../schemas/RecipeSchema');
-const app = require('../server');
+
 // Mock the authentication middleware to bypass auth in integration tests
 jest.mock('../middleware/authentication', () => ({
   isAuthenticated: (req, res, next) => {
@@ -10,42 +11,72 @@ jest.mock('../middleware/authentication', () => ({
   },
 }));
 
+let mongoServer;
+let app;
+
+beforeAll(async () => {
+  // Close any existing mongoose connection
+  if (mongoose.connection.readyState !== 0) {
+    await mongoose.connection.close();
+  }
+
+  mongoServer = await MongoMemoryServer.create();
+  const uri = mongoServer.getUri();
+  await mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  // Import server after database connection is established
+  // Now it won't auto-connect because of our require.main check
+  app = require('../server');
+});
+
+afterAll(async () => {
+  // Safety check: Only drop database if it's the in-memory test database
+  const dbHost = mongoose.connection.host;
+  if (dbHost === '127.0.0.1' || dbHost === 'localhost') {
+    console.log(
+      'Dropping test database from:',
+      mongoose.connection.db.databaseName,
+    );
+    await mongoose.connection.dropDatabase();
+  } else {
+    console.error('SAFETY CHECK: Refusing to drop database on host:', dbHost);
+  }
+  await mongoose.connection.close();
+  await mongoServer.stop();
+});
+
+afterEach(async () => {
+  await Recipe.deleteMany({});
+});
+
 describe('Get Recipe Endpoint', () => {
   test('should retrieve all recipes', async () => {
-    const uniqueName1 = `Test Recipe ${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    const uniqueName2 = `Test Recipe 2 ${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    const recipe1 = await createValidRecipe(uniqueName1);
-    const recipe2 = await createValidRecipe(uniqueName2);
+    await createValidRecipe('Test Recipe');
+    await createValidRecipe('Test Recipe 2');
     const res = await request(app).get('/recipes');
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
-    // expect(res.body).toHaveLength(2);
-
-    // Clean up - delete the test recipes
-    await Recipe.findByIdAndDelete(recipe1._id);
-    await Recipe.findByIdAndDelete(recipe2._id);
+    expect(res.body).toHaveLength(2);
   });
 
-  //Can't do without in memory db
-  // test('get all when none exist', async () => {
-  //   const res = await request(app).get('/recipes');
-  //   expect(res.statusCode).toBe(200);
-  //   expect(Array.isArray(res.body)).toBe(true);
-  //   expect(res.body).toHaveLength(0);
-  // });
+  test('get all when none exist', async () => {
+    const res = await request(app).get('/recipes');
+    expect(res.statusCode).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+    expect(res.body).toHaveLength(0);
+  });
 
   test('should retrieve a recipe by ID', async () => {
-    const uniqueName = `Test Recipe ${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    const recipe = await createValidRecipe(uniqueName);
+    const recipe = await createValidRecipe('Test Recipe');
 
     const res = await request(app).get(`/recipes/${recipe._id}`);
     console.log('Response status:', res.statusCode);
     console.log('Response body:', res.body);
     expect(res.statusCode).toBe(200);
-    expect(res.body.name).toBe(uniqueName);
-
-    // Clean up - delete the test recipe
-    await Recipe.findByIdAndDelete(recipe._id);
+    expect(res.body.name).toBe('Test Recipe');
   });
 
   test('for when there is an invalid ID', async () => {
@@ -89,11 +120,10 @@ describe('Create Recipe Endpoint', () => {
     );
   });
   test('should create a recipe successfully', async () => {
-    const uniqueName = `Test Recipe ${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     const res = await request(app)
       .post('/recipes')
       .send({
-        name: uniqueName,
+        name: 'Test Recipe',
         serves: 4,
         ingredients: [
           {
@@ -111,14 +141,11 @@ describe('Create Recipe Endpoint', () => {
         ],
       });
     expect(res.statusCode).toBe(201);
-    expect(res.body.name).toBe(uniqueName);
+    expect(res.body.name).toBe('Test Recipe');
 
-    const dbRecipe = await Recipe.findOne({ name: uniqueName });
+    const dbRecipe = await Recipe.findOne({ name: 'Test Recipe' });
     expect(dbRecipe).not.toBeNull();
     expect(dbRecipe.serves).toBe(4);
-
-    // Clean up - delete the test recipe
-    await Recipe.findByIdAndDelete(dbRecipe._id);
   });
 });
 
