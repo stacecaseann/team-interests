@@ -21,7 +21,7 @@ Content-Type: application/json
 }
 
 ### Update a movie by ID
-PUT http://localhost:3003/movies/68e034d4d6e6e300e74440ac
+PUT http://localhost:3003/movies/68e07134afa0ca0d0a5a99f7
 Content-Type: application/json
 
 {
