@@ -25,7 +25,9 @@ const getRecipeById = async (req, res) => {
     const result = await recipeModel.getRecipeById(req.params.id);
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result);
+    return result;
   } catch (err) {
+    console.log(err);
     res.status(500).json({ message: err.message });
   }
 };

@@ -15,6 +15,12 @@ const outputFile = './swagger.json';
 const endpoints = ['../routes/index.js'];
 
 const runSwagger = async () => {
+  // Skip swagger generation during tests
+  if (process.env.NODE_ENV === 'test') {
+    console.log('Skipping swagger generation in test environment');
+    return;
+  }
+
   try {
     await swaggerAutogen(outputFile, endpoints, doc);
     console.log('✅ Swagger documentation generated successfully.');
