@@ -220,6 +220,34 @@ const validateBookData = [
     .matches(/^\d{4}$/)
     .withMessage('Year must be a 4-digit number.'),
 ];
+
+const validateScriptureData = [
+  body('book')
+    .notEmpty()
+    .withMessage('Book is required')
+    .trim()
+    .isLength({ min: 3, max: 25 })
+    .withMessage('Book must be between 3 and 25 characters'),
+  body('chapter')
+    .notEmpty()
+    .withMessage('Chapter is required')
+    .trim()
+    .isLength({ min: 1, max: 2 })
+    .withMessage('Chapter must be 1 or 2 characters'),
+  body('verse')
+    .notEmpty()
+    .withMessage('Verse(s) must be included')
+    .trim()
+    .isLength({ min: 1, max: 25 })
+    .withMessage('Verse must be between 25 characters or less'),
+  body('text')
+    .notEmpty()
+    .withMessage('Verse(s) must be included')
+    .trim()
+    .isLength({ min: 1, max: 1000 })
+    .withMessage('Verse must be between 1000 characters or less'),
+]
+
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -234,6 +262,7 @@ module.exports = {
   validateRecipeRules,
   validateRecipeUpdateRules,
   validateRecipeNameRules,
+  validateScriptureData,
   handleValidationErrors,
   validateBookData,
   validateBookArray,
