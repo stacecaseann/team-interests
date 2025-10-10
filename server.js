@@ -138,4 +138,10 @@ async function startServer() {
   }
 }
 
+// Only start the server if this file is run directly (not imported)
+//Need it to start the server if test cases don't use in-memory database
+// if (require.main === module) {
 startServer();
+// }
+
+module.exports = app;

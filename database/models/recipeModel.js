@@ -22,7 +22,7 @@ async function getRecipeById(recipeId) {
     const recipe = await Recipe.findById(recipeId);
     if (!recipe) {
       console.log('Recipe not found');
-      return null;
+      return 'Recipe not found';
     }
     console.log('Recipe found:', recipe);
     return recipe;
@@ -68,6 +68,7 @@ async function createRecipe(recipeData) {
   try {
     const recipe = await Recipe.create(recipeData);
     console.log('Recipe created:', recipe);
+    return recipe;
   } catch (err) {
     console.error('Error creating recipe:', err.message);
     throw err;
