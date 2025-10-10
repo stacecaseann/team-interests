@@ -65,7 +65,7 @@ const movieSchema = new mongoose.Schema({
     },
   },
   // Timestamp of when the movie was added
-  createdAt: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now, immutable: true },
 });
 
 module.exports = mongoose.model('movies', movieSchema);

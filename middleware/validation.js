@@ -177,6 +177,49 @@ const validateRecipeNameRules = [
       }
     }),
 ];
+const validateBookArray = [
+  body().isArray().withMessage('Request body must be an array.'),
+  body('*.title')
+    .notEmpty()
+    .withMessage('Title is required.')
+    .isString()
+    .withMessage('Title must be a string.')
+    .isLength({ min: 2, max: 70 })
+    .withMessage('Title must be between 2 and 70 characters.'),
+  body('*.author')
+    .notEmpty()
+    .withMessage('Author is required.')
+    .isString()
+    .withMessage('Author must be a string.')
+    .isLength({ min: 2, max: 50 })
+    .withMessage('Author must be between 2 and 50 characters.'),
+  body('*.year')
+    .notEmpty()
+    .withMessage('Year is required.')
+    .matches(/^\d{4}$/)
+    .withMessage('Year must be a 4-digit number.'),
+];
+const validateBookData = [
+  body('title')
+    .notEmpty()
+    .withMessage('Title is required.')
+    .isString()
+    .withMessage('Title must be a string.')
+    .isLength({ min: 2, max: 70 })
+    .withMessage('Title must be between 2 and 70 characters.'),
+  body('author')
+    .notEmpty()
+    .withMessage('Author is required.')
+    .isString()
+    .withMessage('Author must be a string.')
+    .isLength({ min: 2, max: 50 })
+    .withMessage('Author must be between 2 and 50 characters.'),
+  body('year')
+    .notEmpty()
+    .withMessage('Year is required.')
+    .matches(/^\d{4}$/)
+    .withMessage('Year must be a 4-digit number.'),
+];
 
 const validateScriptureData = [
   body('book')
@@ -221,4 +264,6 @@ module.exports = {
   validateRecipeNameRules,
   validateScriptureData,
   handleValidationErrors,
+  validateBookData,
+  validateBookArray,
 };
