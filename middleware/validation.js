@@ -246,7 +246,7 @@ const validateScriptureData = [
     .trim()
     .isLength({ min: 1, max: 1000 })
     .withMessage('Verse must be between 1000 characters or less'),
-]
+];
 
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
