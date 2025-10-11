@@ -12,9 +12,23 @@ const doc = {
 };
 
 const outputFile = './swagger.json';
-const endpoints = ['../routes/index.js'];
+const endpoints = [
+  './server.js',
+  './routes/users.js',
+  './routes/recipes.js',
+  './routes/movies.js',
+  './routes/conferenceSpeakers.js',
+  './routes/favoritebooks.js',
+  './routes/scriptures.js',
+]; // Exclude index.js and home.js to prevent circular dependency
 
 const runSwagger = async () => {
+  // Skip swagger generation during tests
+  if (process.env.NODE_ENV === 'test') {
+    console.log('Skipping swagger generation in test environment');
+    return;
+  }
+
   try {
     await swaggerAutogen(outputFile, endpoints, doc);
     console.log('✅ Swagger documentation generated successfully.');

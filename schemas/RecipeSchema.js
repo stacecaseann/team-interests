@@ -15,8 +15,12 @@ const instructionSchema = new mongoose.Schema({
 });
 
 const recipeSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  serves: { type: Number, required: true, min: 1 },
+  name: { type: String, required: [true, 'name is required'] },
+  serves: {
+    type: Number,
+    required: true,
+    min: [1, 'Serves must be at least 1'],
+  },
   description: { type: String, required: false },
   ingredients: [ingredientSchema],
   instructions: [instructionSchema],

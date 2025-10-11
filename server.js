@@ -11,8 +11,8 @@ const GithubStrategy = require('passport-github2').Strategy;
 const cors = require('cors');
 const PORT = process.env.PORT;
 const mainRoute = require('./routes/index');
-const runSwagger = require('./swagger/swagger');
-runSwagger();
+// const runSwagger = require('./swagger/swagger');
+// runSwagger();
 
 // Middleware to parse JSON bodies - replaces body-parser so I deleted it from package.json
 app.use(express.json());
@@ -138,4 +138,10 @@ async function startServer() {
   }
 }
 
+// Only start the server if this file is run directly (not imported)
+//Need it to start the server if test cases don't use in-memory database
+// if (require.main === module) {
 startServer();
+// }
+
+module.exports = app;

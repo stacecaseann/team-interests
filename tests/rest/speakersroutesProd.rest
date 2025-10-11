@@ -1,0 +1,32 @@
+### Gets all speakers
+GET https://team-interests.onrender.com/speakers
+
+### Gets a speaker by ID
+GET https://team-interests.onrender.com/speakers/68e84f29c770d2bf2d5d1e50
+
+### Creates a new speaker
+POST https://team-interests.onrender.com/speakers
+Content-Type: application/json
+
+{
+  "firstName": "Dieter",
+  "lastName": "Uchtdorf",
+  "age": 84,
+  "birthYear": 1956,
+  "quote": "I really like airplanes"
+}
+
+### Updates a speaker
+PUT https://team-interests.onrender.com/speakers/68e84f29c770d2bf2d5d1e50
+Content-Type: application/json
+
+{
+  "firstName": "David",
+  "lastName": "Bednar",
+  "age": 84,
+  "birthYear": 1956,
+  "quote": "Pray and seek for strength"
+}
+
+### Deletes a speaker
+DELETE https://team-interests.onrender.com/speakers/68e855fac770d2bf2d5d1e63
