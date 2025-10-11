@@ -11,11 +11,11 @@
 
 // router.get('/', programmingLanguagesController.getLanguages);
 
-// router.get(
-//   '/:id',
-//   validateObjectId,
-//   programmingLanguagesController.getLanguageById,
-// );
+router.get(
+  '/:id',
+  validateObjectId,
+  programmingLanguagesController.getLanguageById,
+);
 
 // router.post(
 //   '/',
@@ -41,4 +41,4 @@
 //   programmingLanguagesController.deleteLanguage,
 // );
 
-// module.exports = router;
+module.exports = router;

@@ -2,7 +2,7 @@
 GET https://team-interests.onrender.com/programminglanguages
 
 ### Get programming language by ID
-GET https://team-interests.onrender.com/programminglanguages/{id}
+GET https://team-interests.onrender.com/programminglanguages/{68df549232e56b9d340c9ca6}
 
 ### Create a new programming language
 POST https://team-interests.onrender.com/programminglanguages
@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ### Update a programming language by ID
-PUT https://team-interests.onrender.com/programminglanguages/{id}
+PUT https://team-interests.onrender.com/programminglanguages/{68df549232e56b9d340c9ca6}
 Content-Type: application/json
 
 {
@@ -31,4 +31,4 @@ Content-Type: application/json
 }
 
 ### Delete a programming language by ID
-DELETE https://team-interests.onrender.com/programminglanguages/{id}
+DELETE https://team-interests.onrender.com/programminglanguages/{68df549232e56b9d340c9ca6}
