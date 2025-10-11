@@ -5,6 +5,7 @@ const userRoutes = require('./users');
 const movieRoutes = require('./movies');
 const speakerRoutes = require('./conferenceSpeakers');
 const favoriteBooksRoutes = require('./favoritebooks');
+const programmingLanguagesRoutes = require('./programmingLanguages');
 const passport = require('passport');
 
 // Swagger setup
@@ -20,6 +21,7 @@ router.use('/recipes', recipeRoutes);
 router.use('/movies', movieRoutes);
 router.use('/speakers', speakerRoutes);
 router.use('/favoritebooks', favoriteBooksRoutes);
+router.use('/programmingLaunguages', programmingLanguagesRoutes);
 router.get('/login', passport.authenticate('github'));
 
 router.get('/logout', function (req, res, next) {
