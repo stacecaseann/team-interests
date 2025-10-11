@@ -11,6 +11,16 @@
     "https"
   ],
   "paths": {
+    "/github/callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/login": {
       "get": {
         "description": "",
@@ -43,10 +53,106 @@
     },
     "/": {
       "get": {
+        "tags": [
+          "ProgrammingLanguages"
+        ],
+        "summary": "Gets all programming languages.",
         "description": "",
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "60d21b4667d0d8992e610c85"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Sample Book"
+                  },
+                  "author": {
+                    "type": "string",
+                    "example": "Author Name"
+                  },
+                  "year": {
+                    "type": "string",
+                    "example": "1999"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
           "default": {
             "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ProgrammingLanguages"
+        ],
+        "summary": "Creates a new programming language.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "paradigm": {
+                  "example": "any"
+                },
+                "firstAppeared": {
+                  "example": "any"
+                },
+                "creator": {
+                  "example": "any"
+                },
+                "website": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -299,23 +405,27 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "title": { "type": "string", "example": "Saints and Soldiers" },
-                "director": { "type": "string", "example": "Ryan Little" },
-                "language": { "type": "string", "example": "English" },
-                "year": { "type": "integer", "example": 2003 },  
-              "genre": {
-                  "type": "array",
-                  "items": { "type": "string" },
-                  "example": ["War Drama"]
-                  },
-                  "synopsis": {
-                  "type": "string",
-                  "example": "Set during World War II, the film follows a group of Allied soldiers, including an LDS soldier, as they struggle to survive behind enemy lines and deliver crucial intelligence."
-            }
+                "title": {
+                  "example": "any"
+                },
+                "director": {
+                  "example": "any"
+                },
+                "language": {
+                  "example": "any"
+                },
+                "year": {
+                  "example": "any"
+                },
+                "genre": {
+                  "example": "any"
+                },
+                "synopsis": {
+                  "example": "any"
+                }
               }
             }
           }
@@ -549,6 +659,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"
@@ -888,6 +1001,449 @@
       }
     },
     "/favoritebooks/createWithList": {
+      "post": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Add multiple favorite books at once (list)",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "List of favorite books",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "Book 2"
+                  },
+                  "author": {
+                    "type": "string",
+                    "example": "Author 2"
+                  },
+                  "year": {
+                    "type": "string",
+                    "example": "2021"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Books created successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "481": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/scriptures/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/scriptures/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/{username}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "tags": [
+          "ProgrammingLanguages"
+        ],
+        "summary": "Gets a programming language by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ProgrammingLanguages"
+        ],
+        "summary": "Updates a programming language by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "paradigm": {
+                  "example": "any"
+                },
+                "firstAppeared": {
+                  "example": "any"
+                },
+                "creator": {
+                  "example": "any"
+                },
+                "website": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ProgrammingLanguages"
+        ],
+        "summary": "Deletes a programming language by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/name/{recipeName}": {
+      "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Gets all recipes to match Name.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "recipeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the recipes to retrieve."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{bookId}": {
+      "get": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Get a favorite book by ID",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Favorite Book ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Favorite book retrieved successfully"
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Update an existing favorite book",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Favorite Book ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated favorite book data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": "Updated Title"
+                },
+                "author": {
+                  "type": "string",
+                  "example": "Updated Author"
+                },
+                "year": {
+                  "type": "string",
+                  "example": "2022"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book updated successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "404": {
+            "description": "Book not found"
+          },
+          "481": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Delete a favorite book by ID",
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Favorite Book ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book deleted successfully"
+          },
+          "404": {
+            "description": "Book not found"
+          },
+          "481": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/createWithArray": {
+      "post": {
+        "tags": [
+          "FavoriteBooks"
+        ],
+        "description": "Add multiple favorite books at once",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Array of favorite books",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "Book 2"
+                  },
+                  "author": {
+                    "type": "string",
+                    "example": "Author 2"
+                  },
+                  "year": {
+                    "type": "string",
+                    "example": "2021"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Books created successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "481": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/createWithList": {
       "post": {
         "tags": [
           "FavoriteBooks"
