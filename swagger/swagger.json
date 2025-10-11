@@ -1049,24 +1049,71 @@
     },
     "/scriptures/": {
       "get": {
+        "tags": [
+          "Scriptures"
+        ],
+        "summary": "Gets the list of scriptures",
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "post": {
+        "tags": [
+          "Scriptures"
+        ],
+        "summary": "Creates a scripture",
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "book": {
+                  "example": "any"
+                },
+                "chapter": {
+                  "example": "any"
+                },
+                "verse": {
+                  "example": "any"
+                },
+                "text": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
+          "201": {
+            "description": "Created"
+          },
           "400": {
             "description": "Bad Request"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/scriptures/{id}": {
       "get": {
+        "tags": [
+          "Scriptures"
+        ],
+        "summary": "Gets a scripture by ID",
         "description": "",
         "parameters": [
           {
@@ -1077,12 +1124,25 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "put": {
+        "tags": [
+          "Scriptures"
+        ],
+        "summary": "Updates a scripture",
         "description": "",
         "parameters": [
           {
@@ -1090,15 +1150,52 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "book": {
+                  "example": "any"
+                },
+                "chapter": {
+                  "example": "any"
+                },
+                "verse": {
+                  "example": "any"
+                },
+                "text": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
+          "204": {
+            "description": "No Content"
+          },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "delete": {
+        "tags": [
+          "Scriptures"
+        ],
+        "summary": "Deletes a scripture",
         "description": "",
         "parameters": [
           {
@@ -1109,8 +1206,20 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -1207,6 +1316,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
           },
           "400": {
             "description": "Bad Request"
