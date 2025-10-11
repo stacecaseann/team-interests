@@ -22,8 +22,8 @@ describe('Movies API', () => {
   });
 
   test('should pull the first movie in the database', async () => {
-    const allSpeakers = await request(app).get('/movies');
-    const id = allSpeakers.body[0]._id;
+    const allMovies = await request(app).get('/movies');
+    const id = allMovies.body[0]._id;
     const res = await request(app).get(`/movies/${id}`);
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('_id', id);

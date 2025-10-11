@@ -18,6 +18,7 @@ const endpoints = [
   './routes/movies.js',
   './routes/conferenceSpeakers.js',
   './routes/favoritebooks.js',
+  './routes/scriptures.js',
 ]; // Exclude index.js and home.js to prevent circular dependency
 
 const runSwagger = async () => {
