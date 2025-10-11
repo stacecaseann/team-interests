@@ -24,7 +24,7 @@ const getUser = (req, res) => {
     fernando: { interests: 'scriptures' },
     ovinson: { interests: 'movies' },
     cris: { interests: 'speakers' },
-    edeli: { interests: 'favoritebooks' },
+    edeli: { interests: 'favoriteBooks' },
   };
   const user = users[username];
   if (user) {
