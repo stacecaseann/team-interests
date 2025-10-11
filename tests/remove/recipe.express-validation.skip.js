@@ -1,6 +1,6 @@
 const request = require('supertest');
 const express = require('express');
-const recipeRoute = require('../routes/recipes');
+const recipeRoute = require('../../routes/recipes');
 
 // Mock the recipe model to avoid DB access
 jest.mock('../database/models/recipeModel', () => ({
@@ -47,7 +47,7 @@ describe('Express-validator tests (no DB)', () => {
     expect(res.body.errors.length).toBeGreaterThan(0);
     expect(res.body.errors[0].msg).toBe('Name must be a string');
     // Recipe model createRecipe should never be called when validation fails
-    const recipeModel = require('../database/models/recipeModel');
+    const recipeModel = require('../../database/models/recipeModel');
     expect(recipeModel.createRecipe).not.toHaveBeenCalled();
   });
 

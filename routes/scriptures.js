@@ -2,22 +2,22 @@ const express = require('express');
 const router = express.Router();
 
 const validate = require('../middleware/validation');
-const asyncHandler = require('../middleware/asyncHandler');
 const scriptureController = require('../controllers/scriptureController');
 
-router.get('/', asyncHandler(scriptureController.getAllScriptures));
+router.get('/', scriptureController.getAllScriptures);
 
 router.get(
   '/:id',
   validate.validateObjectId,
-  asyncHandler(scriptureController.getScriptureById),
+  validate.handleValidationErrors,
+  scriptureController.getScriptureById,
 );
 
 router.post(
   '/',
   validate.validateScriptureData,
   validate.handleValidationErrors,
-  asyncHandler(scriptureController.addScripture),
+  scriptureController.addScripture,
 );
 
 router.put(
@@ -25,14 +25,14 @@ router.put(
   validate.validateObjectId,
   validate.validateScriptureData,
   validate.handleValidationErrors,
-  asyncHandler(scriptureController.updateScripture),
+  scriptureController.updateScripture,
 );
 
 router.delete(
   '/:id',
   validate.validateObjectId,
   validate.handleValidationErrors,
-  asyncHandler(scriptureController.deleteScripture),
+  scriptureController.deleteScripture,
 );
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const Recipe = require('../schemas/RecipeSchema');
+const Recipe = require('../../schemas/RecipeSchema');
 
 // Mock the authentication middleware to bypass auth in integration tests
 jest.mock('../middleware/authentication', () => ({
@@ -29,7 +29,7 @@ beforeAll(async () => {
 
   // Import server after database connection is established
   // Now it won't auto-connect because of our require.main check
-  app = require('../server');
+  app = require('../../server');
 });
 
 afterAll(async () => {
