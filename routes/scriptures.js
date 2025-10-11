@@ -1,38 +1,40 @@
 const express = require('express');
 const router = express.Router();
-
 const validate = require('../middleware/validation');
-const asyncHandler = require('../middleware/asyncHandler');
 const scriptureController = require('../controllers/scriptureController');
+const { isAuthenticated } = require('../middleware/authentication');
 
-router.get('/', asyncHandler(scriptureController.getAllScriptures));
+router.get('/', scriptureController.getAllScriptures);
 
 router.get(
   '/:id',
   validate.validateObjectId,
-  asyncHandler(scriptureController.getScriptureById),
+  scriptureController.getScriptureById,
 );
 
 router.post(
   '/',
+  isAuthenticated,
   validate.validateScriptureData,
   validate.handleValidationErrors,
-  asyncHandler(scriptureController.addScripture),
+  scriptureController.addScripture,
 );
 
 router.put(
   '/:id',
+  isAuthenticated,
   validate.validateObjectId,
   validate.validateScriptureData,
   validate.handleValidationErrors,
-  asyncHandler(scriptureController.updateScripture),
+  scriptureController.updateScripture,
 );
 
 router.delete(
   '/:id',
+  isAuthenticated,
   validate.validateObjectId,
   validate.handleValidationErrors,
-  asyncHandler(scriptureController.deleteScripture),
+  scriptureController.deleteScripture,
 );
 
 module.exports = router;

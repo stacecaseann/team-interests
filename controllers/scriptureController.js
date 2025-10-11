@@ -2,7 +2,7 @@ const Scripture = require('../schemas/ScriptureSchema');
 
 const getAllScriptures = async (req, res) => {
   //#swagger.tags = ["Scriptures"]
-  //#swagger.summary = "Gets a list of scriptures"
+  //#swagger.summary = "Gets the list of scriptures"
   try {
     const result = await Scripture.find();
     res.status(200).json(result);
