@@ -20,6 +20,7 @@ const displayUsers = (req, res) => {
             <li><a href='/users/ovinson'>Ovinson</a></li>
             <li><a href='/users/cris'>Cris</a></li>
             <li><a href='/users/edeli'>Edeli</a></li>
+            <li><a href='/users/brantley'>Brantley</a></li>
             <li><a href='/users/nefi'>Nefi</a></li>
             </ul>
 
@@ -38,6 +39,7 @@ const getUser = (req, res) => {
     ovinson: { interests: 'movies' },
     cris: { interests: 'speakers' },
     edeli: { interests: 'favoritebooks' },
+    brantley: { interests: 'speakers'}
     nefi: { interests: 'programminglanguages' },
   };
   const user = users[username];
