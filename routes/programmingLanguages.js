@@ -11,7 +11,11 @@ const {
 
 router.get('/', programmingLanguagesController.getLanguages);
 
-router.get('/:id', validateObjectId, programmingLanguagesController.getLanguageById);
+router.get(
+  '/:id',
+  validateObjectId,
+  programmingLanguagesController.getLanguageById,
+);
 
 router.post(
   '/',
