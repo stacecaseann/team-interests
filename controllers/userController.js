@@ -1,16 +1,30 @@
-const displayUsers = (_req, res) => {
+const displayUsers = (req, res) => {
   //#swagger.tags = ['Users']
   //#swagger.summary = 'Displays a list of users.'
   try {
+    let statusMessage = '';
+    let statusLink = '';
+    if (req.session.user) {
+      statusMessage = `You are logged in as: ${req.session.user}`;
+      statusLink = '<a href="/logout">Logout</a>';
+    } else {
+      statusMessage = 'You are not logged in. There may be limited access.';
+      statusLink = '<a href="/login">Login with GitHub</a>';
+    }
     res.send(
       `<h1>Users and their Interests</h1>
+            <p>${statusMessage}</p>
             <ul>
             <li><a href='/users/stacy'>Stacy</a></li>
             <li><a href='/users/fernando'>Fernando</a></li>
             <li><a href='/users/ovinson'>Ovinson</a></li>
             <li><a href='/users/cris'>Cris</a></li>
             <li><a href='/users/edeli'>Edeli</a></li>
-            </ul>`,
+            <li><a href='/users/brantley'>Brantley</a></li>
+            <li><a href='/users/nefi'>Nefi</a></li>
+            </ul>
+
+            ${statusLink}`,
     );
   } catch (err) {
     res.status(500).json({ message: 'Error fetching users', error: err });
@@ -25,6 +39,8 @@ const getUser = (req, res) => {
     ovinson: { interests: 'movies' },
     cris: { interests: 'speakers' },
     edeli: { interests: 'favoritebooks' },
+    brantley: { interests: 'speakers' },
+    nefi: { interests: 'programminglanguages' },
   };
   const user = users[username];
   if (user) {

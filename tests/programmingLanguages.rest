@@ -1,0 +1,34 @@
+### Get all programming languages
+GET https://team-interests.onrender.com/programminglanguages
+
+### Get programming language by ID
+GET https://team-interests.onrender.com/programminglanguages/{68df549232e56b9d340c9ca6}
+
+### Create a new programming language
+POST https://team-interests.onrender.com/programminglanguages
+Content-Type: application/json
+
+{
+  "name": "Python",
+  "paradigm": ["Object-Oriented", "Imperative", "Functional"],
+  "firstAppeared": 1991,
+  "creator": "Guido van Rossum",
+  "website": "https://www.python.org",
+  "description": "Python is a popular, easy-to-read programming language."
+}
+
+### Update a programming language by ID
+PUT https://team-interests.onrender.com/programminglanguages/{68df549232e56b9d340c9ca6}
+Content-Type: application/json
+
+{
+  "name": "Python Updated",
+  "paradigm": ["Object-Oriented", "Imperative", "Functional"],
+  "firstAppeared": 1991,
+  "creator": "Guido van Rossum",
+  "website": "https://www.python.org",
+  "description": "Python is a popular, easy-to-read programming language. Updated description."
+}
+
+### Delete a programming language by ID
+DELETE https://team-interests.onrender.com/programminglanguages/{68df549232e56b9d340c9ca6}

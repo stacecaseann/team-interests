@@ -220,6 +220,95 @@ const validateBookData = [
     .matches(/^\d{4}$/)
     .withMessage('Year must be a 4-digit number.'),
 ];
+
+const validateScriptureData = [
+  body('book')
+    .notEmpty()
+    .withMessage('Book is required')
+    .trim()
+    .isLength({ min: 3, max: 25 })
+    .withMessage('Book must be between 3 and 25 characters'),
+  body('chapter')
+    .notEmpty()
+    .withMessage('Chapter is required')
+    .trim()
+    .isLength({ min: 1, max: 2 })
+    .withMessage('Chapter must be 1 or 2 characters'),
+  body('verse')
+    .notEmpty()
+    .withMessage('Verse(s) must be included')
+    .trim()
+    .isLength({ min: 1, max: 25 })
+    .withMessage('Verse must be between 25 characters or less'),
+  body('text')
+    .notEmpty()
+    .withMessage('Verse(s) must be included')
+    .trim()
+    .isLength({ min: 1, max: 1000 })
+    .withMessage('Verse must be between 1000 characters or less'),
+];
+
+const validateSpeakerData = [
+  body('firstName')
+    .trim()
+    .notEmpty()
+    .withMessage('First name is required!')
+    .isLength({ min: 2, max: 25 })
+    .withMessage('First name must be between 2 and 25 characters!'),
+  body('lastName')
+    .trim()
+    .notEmpty()
+    .withMessage('Last name is required!')
+    .isLength({ min: 2, max: 25 })
+    .withMessage('Last name must be between 2 and 25 characters!'),
+  body('age')
+    .notEmpty()
+    .withMessage('Age is required!')
+    .isInt({ min: 0, max: 110 })
+    .withMessage('Age needs to be between 0 and 110!'),
+  body('birthYear')
+    .notEmpty()
+    .withMessage('Birth year is required!')
+    .isInt({ min: 1900, max: new Date().getFullYear() })
+    .withMessage(
+      'Birth Year is required and has to be a 4 digit number between 1900 and the current year!',
+    ),
+  body('quote')
+    .trim()
+    .notEmpty()
+    .withMessage('Quote is required!')
+    .isLength({ min: 2, max: 1000 })
+    .withMessage('A Quote is required to be between 2 and 1000 characters'),
+];
+
+const validateSpeakerUpdateData = [
+  body('firstName')
+    .optional()
+    .trim()
+    .isLength({ min: 2, max: 25 })
+    .withMessage('First name must be between 2 and 25 characters!'),
+  body('lastName')
+    .optional()
+    .trim()
+    .isLength({ min: 2, max: 25 })
+    .withMessage('Last name must be between 2 and 25 characters!'),
+  body('age')
+    .optional()
+    .isInt({ min: 0, max: 110 })
+    .withMessage('Age needs to be a number between 0 and 110!'),
+  body('birthYear')
+    .optional()
+    .isInt({ min: 1900, max: new Date().getFullYear() })
+    .withMessage(
+      'Birth Year is required and has to be a 4 digit number between 1900 and the current year!',
+    ),
+  body('quote')
+    .optional()
+    .trim()
+    .isLength({ min: 2, max: 1000 })
+    .withMessage('A Quote is required to be between 2 and 1000 characters'),
+];
+
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -228,13 +317,62 @@ const handleValidationErrors = (req, res, next) => {
   return next();
 };
 
+// Validation rules for programming languages
+const validateProgrammingLanguageData = [
+  body('name')
+    .notEmpty()
+    .withMessage('Name is required.')
+    .isString()
+    .withMessage('Name must be a string.')
+    .isLength({ min: 2, max: 40 })
+    .withMessage('Name must be between 2 and 40 characters.'),
+  body('paradigm')
+    .notEmpty()
+    .withMessage('Paradigm is required.')
+    .isArray({ min: 1 })
+    .withMessage('Paradigm must be a non-empty array.'),
+  body('paradigm.*')
+    .isString()
+    .withMessage('Paradigm must be a string.')
+    .isLength({ min: 2, max: 20 })
+    .withMessage('Paradigm must be between 2 and 20 characters.'),
+  body('firstAppeared')
+    .notEmpty()
+    .withMessage('First appeared is required.')
+    .isNumeric()
+    .withMessage('First appeared must be a number.')
+    .isLength({ min: 4, max: 4 })
+    .withMessage('First appeared must be a 4-digit year.'),
+  body('creator')
+    .notEmpty()
+    .withMessage('Creator is required.')
+    .isString()
+    .withMessage('Creator must be a string.')
+    .isLength({ min: 2, max: 40 })
+    .withMessage('Creator must be between 2 and 40 characters.'),
+  body('website')
+    .optional()
+    .isURL()
+    .withMessage('Website must be a valid URL.'),
+  body('description')
+    .optional()
+    .isString()
+    .withMessage('Description must be a string.')
+    .isLength({ max: 300 })
+    .withMessage('Description must be at most 300 characters.'),
+];
+
 module.exports = {
   validateObjectId,
   validateMovieData,
   validateRecipeRules,
   validateRecipeUpdateRules,
   validateRecipeNameRules,
+  validateScriptureData,
   handleValidationErrors,
   validateBookData,
   validateBookArray,
+  validateSpeakerData,
+  validateSpeakerUpdateData,
+  validateProgrammingLanguageData,
 };
