@@ -2,7 +2,7 @@ const Scripture = require('../schemas/ScriptureSchema');
 
 const getAllScriptures = async (req, res) => {
   //#swagger.tags = ["Scriptures"]
-  //#swagger.summary = "Gets a list of scriptures"
+  //#swagger.summary = "Gets the list of scriptures"
   try {
     const result = await Scripture.find();
     res.status(200).json(result);
@@ -27,6 +27,7 @@ const getScriptureById = async (req, res) => {
 };
 
 const addScripture = async (req, res) => {
+  console.log('Request body:', req.body);
   //#swagger.tags = ["Scriptures"]
   //#swagger.summary = "Creates a scripture"
   try {
@@ -36,7 +37,7 @@ const addScripture = async (req, res) => {
       verse: req.body.verse,
       text: req.body.text,
     });
-    await result.save;
+    await result.save();
     return res.status(201).json(result);
   } catch (error) {
     if (error.name === 'ValidationError') {
@@ -80,6 +81,8 @@ const updateScripture = async (req, res) => {
 };
 
 const deleteScripture = async (req, res) => {
+  console.log('Request body:', req.params);
+
   //#swagger.tags = ["Scriptures"]
   //#swagger.summary = "Deletes a scripture"
   const { id } = req.params;

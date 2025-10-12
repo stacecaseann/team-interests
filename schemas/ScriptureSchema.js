@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-const scriptureSchema = new mongoose.Schema({
+const ScriptureSchema = new mongoose.Schema({
   book: {
     type: String,
     required: [true, 'Book is required'],
@@ -44,4 +44,4 @@ const scriptureSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Scripture', scriptureSchema);
+module.exports = mongoose.model('Scripture', ScriptureSchema);
