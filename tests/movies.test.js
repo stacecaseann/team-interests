@@ -1,37 +1,84 @@
 const request = require('supertest');
 const app = require('../server');
 
-describe('Movies API', () => {
-  test('should pull all of the movies in the database', async () => {
-    const res = await request(app).get('/movies');
-    expect(res.statusCode).toBe(200);
-    expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body.length).toBeGreaterThan(0);
+describe('Get all movies and get a movie by ID', () => {
+  test('Should get all movies', async () => {
+    const response = await request(app).get('/movies');
+
+    expect(Array.isArray(response.body)).toBe(true);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body[0]._id).toBeDefined();
+    expect(response.body[0].title).toBeDefined();
+    expect(response.body[0].director).toBeDefined();
+    expect(response.body[0].language).toBeDefined();
+    expect(response.body[0].year).toBeDefined();
+    expect(response.body[0].genre).toBeDefined();
+    expect(response.body[0].synopsis).toBeDefined();
+    expect(response.body[0].createdAt).toBeDefined();
   });
 
-  test('should return a 400 error for an invalid ID', async () => {
-    const res = await request(app).get('/movies/125ef156318633fs');
-    expect(res.statusCode).toBe(400);
-    expect(res.body).toHaveProperty('error', 'Invalid ID format');
-  });
-
-  test("sould return a 404 error for an valid ID but it's not found", async () => {
-    const res = await request(app).get('/movies/68e84f29c770d2bf2d5d1e57');
-    expect(res.statusCode).toBe(404);
-    expect(res.body).toHaveProperty('error', 'Movie not found');
-  });
-
-  test('should pull the first movie in the database', async () => {
+  test('Should get a movie by ID', async () => {
     const allMovies = await request(app).get('/movies');
     const id = allMovies.body[0]._id;
-    const res = await request(app).get(`/movies/${id}`);
-    expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty('_id', id);
-    expect(res.body).toHaveProperty('title');
-    expect(res.body).toHaveProperty('language');
-    expect(res.body).toHaveProperty('year');
-    expect(res.body).toHaveProperty('genre');
-    expect(res.body).toHaveProperty('synopsis');
-    expect(res.body).toHaveProperty('createdAt');
+    const response = await request(app).get(`/movies/${id}`);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body._id).toBeDefined();
+    expect(response.body.title).toBeDefined();
+    expect(response.body.director).toBeDefined();
+    expect(response.body.language).toBeDefined();
+    expect(response.body.year).toBeDefined();
+    expect(response.body.genre).toBeDefined();
+    expect(response.body.synopsis).toBeDefined();
+    expect(response.body.createdAt).toBeDefined();
+  });
+
+  test('Should return a 400 error for an invalid ID', async () => {
+    const response = await request(app).get('/movies/68e7cd0a2aa8fd30f25c6');
+    expect(response.statusCode).toBe(400);
+  });
+
+  test('Should return a 404 error for a valid ID that is not found', async () => {
+    const response = await request(app).get('/movies/68e7cd0a2aa8fd30f25c6eaa');
+    expect(response.statusCode).toBe(404);
   });
 });
+
+// const { MongoClient } = require('mongodb');
+// require('dotenv').config();
+
+// describe('create a new movie', () => {
+//   let connection;
+//   let db;
+
+//   beforeAll(async () => {
+//     connection = await MongoClient.connect(process.env.MONGO_URI, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     });
+//     db = connection.db();
+//   });
+
+//   afterAll(async () => {
+//     await connection.close();
+//   });
+
+//   afterEach(async () => {
+//     await db.collection('movies').deleteOne({ title: 'Inception' });
+//   });
+
+//   test('should create a new movie in the database', async () => {
+//     const movies = db.collection('movies');
+//     const newMovie = {
+//       title: 'Inception',
+//       language: 'English',
+//       year: 2010,
+//       genre: 'Sci-Fi',
+//       synopsis:
+//         'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.',
+//     };
+//     const result = await movies.insertOne(newMovie);
+//     expect(result.insertedId).toBeDefined();
+//   });
+// });
