@@ -19,14 +19,14 @@ const ProgrammingLanguageSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'First appeared year is required'],
       min: [1940, 'Year must be after 1940'],
-      max: [new Date().getFullYear(), 'Year cannot be in the future'],
+      max: [new Date().getFullYear(), `Year cannot be in the future`],
     },
     creator: {
       type: String,
       required: [true, 'Creator is required'],
       trim: true,
       minlength: [2, 'Creator must be at least 2 characters'],
-      maxlength: [40, 'Creator cannot exceed 40 characters'],
+      maxlength: [40, `Creator cannot exceed 40 characters`],
     },
     website: {
       type: String,

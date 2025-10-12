@@ -5,11 +5,9 @@
     "description": "This API allows users to see our interests endpoints and add/update/delete if authenticated.",
     "version": "1.0.0"
   },
-  "host": "team-interests.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/github/callback": {
       "get": {
@@ -53,10 +51,12 @@
     },
     "/": {
       "get": {
+        "tags": ["ProgrammingLanguages"],
+        "summary": "Gets all programming languages.",
         "description": "",
         "responses": {
           "200": {
-            "description": "Favorite books retrieved successfully",
+            "description": "OK",
             "schema": {
               "type": "array",
               "items": {
@@ -100,10 +100,50 @@
         }
       },
       "post": {
+        "tags": ["ProgrammingLanguages"],
+        "summary": "Creates a new programming language.",
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Python"
+                },
+                "paradigm": {
+                  "type": "array",
+                  "example": ["Object-Oriented", "Functional", "Imperative"],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "firstAppeared": {
+                  "type": "number",
+                  "example": 1991
+                },
+                "creator": {
+                  "type": "string",
+                  "example": "Guido van Rossum"
+                },
+                "website": {
+                  "type": "string",
+                  "example": "https://python.org"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Python is a programming language that lets you work quickly."
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
-            "description": "Book created successfully"
+            "description": "Created"
           },
           "400": {
             "description": "Bad Request"
@@ -150,9 +190,7 @@
     },
     "/recipes/": {
       "get": {
-        "tags": [
-          "Recipes"
-        ],
+        "tags": ["Recipes"],
         "summary": "Gets all recipes.",
         "description": "",
         "responses": {
@@ -165,14 +203,10 @@
         }
       },
       "post": {
-        "tags": [
-          "Recipes"
-        ],
+        "tags": ["Recipes"],
         "summary": "Creates a new recipe.",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "recipe",
@@ -202,14 +236,10 @@
     },
     "/recipes/{id}": {
       "get": {
-        "tags": [
-          "Recipes"
-        ],
+        "tags": ["Recipes"],
         "summary": "Gets a recipe by ID.",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -232,14 +262,10 @@
         }
       },
       "put": {
-        "tags": [
-          "Recipes"
-        ],
+        "tags": ["Recipes"],
         "summary": "Updates a recipe by ID.",
         "description": "Updates fields in the recipe. The ingredients and instructions will need the complete list in order to be updated correctly.",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -274,14 +300,10 @@
         }
       },
       "delete": {
-        "tags": [
-          "Recipes"
-        ],
+        "tags": ["Recipes"],
         "summary": "Deletes a recipe by ID.",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -309,14 +331,10 @@
     },
     "/recipes/name/{recipeName}": {
       "get": {
-        "tags": [
-          "Recipes"
-        ],
+        "tags": ["Recipes"],
         "summary": "Gets all recipes to match Name.",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "recipeName",
@@ -341,9 +359,7 @@
     },
     "/movies/": {
       "get": {
-        "tags": [
-          "Movies"
-        ],
+        "tags": ["Movies"],
         "summary": "Gets all movies.",
         "description": "",
         "responses": {
@@ -359,9 +375,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Movies"
-        ],
+        "tags": ["Movies"],
         "summary": "Creates a new movie.",
         "description": "",
         "parameters": [
@@ -414,9 +428,7 @@
     },
     "/movies/{id}": {
       "get": {
-        "tags": [
-          "Movies"
-        ],
+        "tags": ["Movies"],
         "summary": "Gets a movie by ID.",
         "description": "",
         "parameters": [
@@ -443,9 +455,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Movies"
-        ],
+        "tags": ["Movies"],
         "summary": "Updates a movie by ID.",
         "description": "",
         "parameters": [
@@ -505,9 +515,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Movies"
-        ],
+        "tags": ["Movies"],
         "summary": "Deletes a movie by ID.",
         "description": "",
         "parameters": [
@@ -539,9 +547,7 @@
     },
     "/speakers/": {
       "get": {
-        "tags": [
-          "Speakers"
-        ],
+        "tags": ["Speakers"],
         "summary": "Gets all speakers.",
         "description": "",
         "responses": {
@@ -557,9 +563,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Speakers"
-        ],
+        "tags": ["Speakers"],
         "summary": "Creates a new speaker.",
         "description": "",
         "parameters": [
@@ -606,9 +610,7 @@
     },
     "/speakers/{id}": {
       "get": {
-        "tags": [
-          "Speakers"
-        ],
+        "tags": ["Speakers"],
         "summary": "Gets a speaker by ID.",
         "description": "",
         "parameters": [
@@ -635,9 +637,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Speakers"
-        ],
+        "tags": ["Speakers"],
         "summary": "Updates a speaker by ID.",
         "description": "",
         "parameters": [
@@ -691,9 +691,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Speakers"
-        ],
+        "tags": ["Speakers"],
         "summary": "Deletes a speaker by ID.",
         "description": "",
         "parameters": [
@@ -725,9 +723,7 @@
     },
     "/favoritebooks/": {
       "get": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Get a list of all favorite books",
         "responses": {
           "200": {
@@ -766,9 +762,7 @@
         }
       },
       "post": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Add a new favorite book",
         "parameters": [
           {
@@ -792,11 +786,7 @@
                   "example": "1999"
                 }
               },
-              "required": [
-                "title",
-                "author",
-                "year"
-              ]
+              "required": ["title", "author", "year"]
             }
           }
         ],
@@ -815,9 +805,7 @@
     },
     "/favoritebooks/{bookId}": {
       "get": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Get a favorite book by ID",
         "parameters": [
           {
@@ -838,9 +826,7 @@
         }
       },
       "put": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Update an existing favorite book",
         "parameters": [
           {
@@ -890,9 +876,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Delete a favorite book by ID",
         "parameters": [
           {
@@ -918,9 +902,7 @@
     },
     "/favoritebooks/createWithArray": {
       "post": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Add multiple favorite books at once",
         "parameters": [
           {
@@ -965,9 +947,7 @@
     },
     "/favoritebooks/createWithList": {
       "post": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Add multiple favorite books at once (list)",
         "parameters": [
           {
@@ -1006,6 +986,203 @@
           },
           "481": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/programminglanguages/": {
+      "get": {
+        "tags": ["ProgrammingLanguages"],
+        "summary": "Gets all programming languages.",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["ProgrammingLanguages"],
+        "summary": "Creates a new programming language.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Python"
+                },
+                "paradigm": {
+                  "type": "array",
+                  "example": ["Object-Oriented", "Functional", "Imperative"],
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "firstAppeared": {
+                  "type": "number",
+                  "example": 1991
+                },
+                "creator": {
+                  "type": "string",
+                  "example": "Guido van Rossum"
+                },
+                "website": {
+                  "type": "string",
+                  "example": "https://python.org"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Python is a programming language that lets you work quickly."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/programminglanguages/{id}": {
+      "get": {
+        "tags": ["ProgrammingLanguages"],
+        "summary": "Gets a programming language by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["ProgrammingLanguages"],
+        "summary": "Updates a programming language by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "paradigm": {
+                  "example": "any"
+                },
+                "firstAppeared": {
+                  "example": "any"
+                },
+                "creator": {
+                  "example": "any"
+                },
+                "website": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["ProgrammingLanguages"],
+        "summary": "Deletes a programming language by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -1096,105 +1273,12 @@
         }
       }
     },
-    "/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "409": {
-            "description": "Conflict"
-          },
-          "481": {
-            "description": ""
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "481": {
-            "description": ""
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/name/{recipeName}": {
       "get": {
-        "tags": [
-          "Recipes"
-        ],
+        "tags": ["Recipes"],
         "summary": "Gets all recipes to match Name.",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "recipeName",
@@ -1219,9 +1303,7 @@
     },
     "/{bookId}": {
       "get": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Get a favorite book by ID",
         "parameters": [
           {
@@ -1242,9 +1324,7 @@
         }
       },
       "put": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Update an existing favorite book",
         "parameters": [
           {
@@ -1294,9 +1374,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Delete a favorite book by ID",
         "parameters": [
           {
@@ -1322,9 +1400,7 @@
     },
     "/createWithArray": {
       "post": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Add multiple favorite books at once",
         "parameters": [
           {
@@ -1369,9 +1445,7 @@
     },
     "/createWithList": {
       "post": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Add multiple favorite books at once (list)",
         "parameters": [
           {

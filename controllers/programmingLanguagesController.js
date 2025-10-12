@@ -1,4 +1,4 @@
-const ProgrammingLanguage = require('../schemas/programmingLanguageSchema.js');
+const ProgrammingLanguage = require('../schemas/ProgrammingLanguageSchema');
 
 const getLanguages = async (req, res) => {
   //#swagger.tags = ['ProgrammingLanguages']
@@ -34,8 +34,20 @@ const getLanguageById = async (req, res) => {
 };
 
 const createLanguage = async (req, res) => {
-  //#swagger.tags = ['ProgrammingLanguages']
-  //#swagger.summary = 'Creates a new programming language.'
+  /* #swagger.tags = ['ProgrammingLanguages']
+     #swagger.summary = 'Creates a new programming language.'
+     #swagger.parameters['body'] = {
+        in: 'body',
+        schema: {
+            name: "Python",
+            paradigm: ["Object-Oriented", "Functional", "Imperative"],
+            firstAppeared: 1991,
+            creator: "Guido van Rossum",
+            website: "https://python.org",
+            description: "Python is a programming language that lets you work quickly."
+        }
+     }
+  */
   try {
     const result = await ProgrammingLanguage.create({
       name: req.body.name,
@@ -49,7 +61,7 @@ const createLanguage = async (req, res) => {
   } catch (err) {
     if (err.code === 11000) {
       return res.status(409).json({
-        message: 'A programming language with the same name already exists',
+        message: 'A programming language with this name already exists',
       });
     }
     if (err.name === 'ValidationError') {
@@ -58,9 +70,9 @@ const createLanguage = async (req, res) => {
         .status(400)
         .json({ error: 'Validation failed', details: validationErrors });
     }
-    return res
-      .status(500)
-      .json({ error: 'Failed to create programming language' });
+    return res.status(500).json({
+      error: 'Failed to create programming language',
+    });
   }
 };
 

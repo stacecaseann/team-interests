@@ -34,11 +34,11 @@
   "main": "server.js",
   "scripts": {
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "eslint .",
     "dev": "nodemon server.js",
     "prod": "node server.js",
     "swagger": "node swagger/swagger.js",
-    "test": "jest --detectOpenHandles --forceExit"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
