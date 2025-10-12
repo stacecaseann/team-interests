@@ -33,6 +33,7 @@ const getLanguageById = async (req, res) => {
   }
 };
 
+// Create a new programming language
 const createLanguage = async (req, res) => {
   /* #swagger.tags = ['ProgrammingLanguages']
      #swagger.summary = 'Creates a new programming language.'
