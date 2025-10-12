@@ -27,6 +27,7 @@ const getScriptureById = async (req, res) => {
 };
 
 const addScripture = async (req, res) => {
+  console.log('Request body:', req.body);
   //#swagger.tags = ["Scriptures"]
   //#swagger.summary = "Creates a scripture"
   try {
@@ -36,7 +37,7 @@ const addScripture = async (req, res) => {
       verse: req.body.verse,
       text: req.body.text,
     });
-    await result.save;
+    await result.save();
     return res.status(201).json(result);
   } catch (error) {
     if (error.name === 'ValidationError') {
@@ -80,6 +81,8 @@ const updateScripture = async (req, res) => {
 };
 
 const deleteScripture = async (req, res) => {
+  console.log('Request body:', req.params);
+
   //#swagger.tags = ["Scriptures"]
   //#swagger.summary = "Deletes a scripture"
   const { id } = req.params;
