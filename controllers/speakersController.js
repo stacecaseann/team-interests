@@ -22,8 +22,8 @@ const getSpeaker = async (req, res) => {
   //#swagger.summary = 'Gets a speaker by ID.'
   const { id } = req.params;
   try {
-    if(!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ error: "You passed an invalid ID"})
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'You passed an invalid ID' });
     }
     const result = await Speaker.findById(id);
     if (!result) {
