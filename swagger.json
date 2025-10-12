@@ -5,17 +5,13 @@
     "description": "This API allows users to see our interests endpoints and add/update/delete if authenticated.",
     "version": "1.0.0"
   },
-  "host": "team-interests.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/": {
       "get": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Get a list of all favorite books",
         "responses": {
           "200": {
@@ -63,9 +59,7 @@
         }
       },
       "post": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Add a new favorite book",
         "parameters": [
           {
@@ -89,11 +83,7 @@
                   "example": "1999"
                 }
               },
-              "required": [
-                "title",
-                "author",
-                "year"
-              ]
+              "required": ["title", "author", "year"]
             }
           }
         ],
@@ -136,9 +126,7 @@
     },
     "/{id}": {
       "get": {
-        "tags": [
-          "Speakers"
-        ],
+        "tags": ["Speakers"],
         "summary": "Gets a speaker by ID.",
         "description": "",
         "parameters": [
@@ -165,9 +153,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Speakers"
-        ],
+        "tags": ["Speakers"],
         "summary": "Updates a speaker by ID.",
         "description": "",
         "parameters": [
@@ -224,9 +210,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Speakers"
-        ],
+        "tags": ["Speakers"],
         "summary": "Deletes a speaker by ID.",
         "description": "",
         "parameters": [
@@ -261,14 +245,10 @@
     },
     "/name/{recipeName}": {
       "get": {
-        "tags": [
-          "Recipes"
-        ],
+        "tags": ["Recipes"],
         "summary": "Gets all recipes to match Name.",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "recipeName",
@@ -293,9 +273,7 @@
     },
     "/{bookId}": {
       "get": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Get a favorite book by ID",
         "parameters": [
           {
@@ -316,9 +294,7 @@
         }
       },
       "put": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Update an existing favorite book",
         "parameters": [
           {
@@ -368,9 +344,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Delete a favorite book by ID",
         "parameters": [
           {
@@ -396,9 +370,7 @@
     },
     "/createWithArray": {
       "post": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Add multiple favorite books at once",
         "parameters": [
           {
@@ -443,9 +415,7 @@
     },
     "/createWithList": {
       "post": {
-        "tags": [
-          "FavoriteBooks"
-        ],
+        "tags": ["FavoriteBooks"],
         "description": "Add multiple favorite books at once (list)",
         "parameters": [
           {
