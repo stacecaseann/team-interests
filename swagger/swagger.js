@@ -6,9 +6,9 @@ const doc = {
     description:
       'This API allows users to see our interests endpoints and add/update/delete if authenticated.',
   },
-  host: 'localhost:3003',
+  host: 'team-interests.onrender.com',
   basePath: '/',
-  schemes: ['http'],
+  schemes: ['https'],
 };
 
 const outputFile = './swagger.json';
