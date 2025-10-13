@@ -6,22 +6,13 @@ const doc = {
     description:
       'This API allows users to see our interests endpoints and add/update/delete if authenticated.',
   },
-  host: 'team-interests.onrender.com',
+  host: 'localhost:3003',
   basePath: '/',
-  schemes: ['https'],
+  schemes: ['http'],
 };
 
 const outputFile = './swagger.json';
-const endpoints = [
-  './server.js',
-  './routes/users.js',
-  './routes/recipes.js',
-  './routes/movies.js',
-  './routes/conferenceSpeakers.js',
-  './routes/favoritebooks.js',
-  './routes/scriptures.js',
-  './routes/programmingLanguages.js',
-]; // Exclude index.js and home.js to prevent circular dependency
+const endpoints = ['./server.js']; // Exclude index.js and home.js to prevent circular dependency
 
 const runSwagger = async () => {
   // Skip swagger generation during tests

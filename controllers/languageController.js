@@ -1,7 +1,7 @@
-const ProgrammingLanguage = require('../schemas/programmingLanguageSchema.js');
+const ProgrammingLanguage = require('../schemas/LanguageSchema.js');
 
 const getLanguages = async (req, res) => {
-  //#swagger.tags = ['ProgrammingLanguages']
+  //#swagger.tags = ['languages']
   //#swagger.summary = 'Gets all programming languages.'
   try {
     const result = await ProgrammingLanguage.find();
@@ -17,7 +17,7 @@ const getLanguages = async (req, res) => {
 };
 
 const getLanguageById = async (req, res) => {
-  //#swagger.tags = ['ProgrammingLanguages']
+  //#swagger.tags = ['languages']
   //#swagger.summary = 'Gets a programming language by ID.'
   const { id } = req.params;
   try {
@@ -34,7 +34,7 @@ const getLanguageById = async (req, res) => {
 };
 
 const createLanguage = async (req, res) => {
-  //#swagger.tags = ['ProgrammingLanguages']
+  //#swagger.tags = ['languages']
   //#swagger.summary = 'Creates a new programming language.'
   try {
     const result = await ProgrammingLanguage.create({
@@ -65,7 +65,7 @@ const createLanguage = async (req, res) => {
 };
 
 const updateLanguage = async (req, res) => {
-  //#swagger.tags = ['ProgrammingLanguages']
+  //#swagger.tags = ['languages']
   //#swagger.summary = 'Updates a programming language by ID.'
   const { id } = req.params;
   try {
@@ -104,7 +104,7 @@ const updateLanguage = async (req, res) => {
 };
 
 const deleteLanguage = async (req, res) => {
-  //#swagger.tags = ['ProgrammingLanguages']
+  //#swagger.tags = ['languages']
   //#swagger.summary = 'Deletes a programming language by ID.'
   const { id } = req.params;
   try {
