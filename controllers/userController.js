@@ -40,7 +40,7 @@ const getUser = (req, res) => {
     cris: { interests: 'speakers' },
     edeli: { interests: 'favoritebooks' },
     brantley: { interests: 'speakers' },
-    nefi: { interests: 'programminglanguages' },
+    nefi: { interests: 'languages' },
   };
   const user = users[username];
   if (user) {

@@ -3,7 +3,6 @@ require('dotenv').config();
 
 const express = require('express');
 const app = express();
-const bodyparser = require('body-parser');
 const mongodb = require('./database/connect');
 const session = require('express-session');
 const passport = require('passport');
@@ -11,13 +10,11 @@ const GithubStrategy = require('passport-github2').Strategy;
 const cors = require('cors');
 const PORT = process.env.PORT;
 const mainRoute = require('./routes/index');
-const runSwagger = require('./swagger/swagger');
-runSwagger();
-// const runSwagger = require('./swagger/swagger');
-// runSwagger();
 
 // Middleware to parse JSON bodies - replaces body-parser so I deleted it from package.json
 app.use(express.json());
+// CORS Middleware
+app.use(cors());
 
 // Global error handling for uncaught exceptions
 process.on('uncaughtException', (err, origin) => {
@@ -44,10 +41,7 @@ process.on('unhandledRejection', (reason, promise) => {
   process.exitCode = 2; // Indicate an unhandled rejection occurred
 });
 
-// CORS Middleware
-app.use(cors());
 app
-  .use(bodyparser.json())
   .use(
     session({
       secret: 'secret',
@@ -59,20 +53,7 @@ app
   // Basic express session({..}) initialization.
   .use(passport.initialize())
   // init passport on every route call.
-  .use(passport.session())
-  // allow passport to use "express-session".
-  .use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept, Z-Key, Authorization',
-    );
-    res.setHeader(
-      'Access-Control-Allow-Methods',
-      'POST, GET, PUT, PATCH, OPTIONS, DELETE',
-    );
-    next();
-  });
+  .use(passport.session());
 
 passport.use(
   new GithubStrategy(

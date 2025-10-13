@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { isAuthenticated } = require('../middleware/authentication');
 
-const programmingLanguagesController = require('../controllers/programmingLanguagesController');
+const programmingLanguagesController = require('../controllers/languageController');
 const {
   validateObjectId,
   validateProgrammingLanguageData,
