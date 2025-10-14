@@ -5,7 +5,8 @@ const displayUsers = (req, res) => {
     let statusMessage = '';
     let statusLink = '';
     if (req.session.user) {
-      statusMessage = `You are logged in as: ${req.session.user}`;
+      const { username } = req.session.user;
+      statusMessage = `You are logged in as: ${username}`;
       statusLink = '<a href="/logout">Logout</a>';
     } else {
       statusMessage = 'You are not logged in. There may be limited access.';
