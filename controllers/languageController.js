@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const ProgrammingLanguage = require('../schemas/LanguageSchema.js');
 
 const getLanguages = async (req, res) => {
@@ -20,10 +21,13 @@ const getLanguageById = async (req, res) => {
   //#swagger.tags = ['languages']
   //#swagger.summary = 'Gets a programming language by ID.'
   const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'Invalid language ID' });
+  }
   try {
     const result = await ProgrammingLanguage.findById(id);
     if (!result) {
-      return res.status(404).json({ error: 'Programming language not found' });
+      return res.status(404).json({ error: 'Language not found' });
     }
     return res.status(200).json(result);
   } catch (err) {
