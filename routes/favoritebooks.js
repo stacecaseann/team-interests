@@ -2,7 +2,7 @@ const router = require('express').Router();
 const favoriteBooksController = require('../controllers/favoriteBooksController');
 const { isAuthenticated } = require('../middleware/authentication');
 
-router.get('/', isAuthenticated, favoriteBooksController.getAllBooks);
+router.get('/', favoriteBooksController.getAllBooks);
 router.get('/:bookId', favoriteBooksController.getBookById);
 router.post('/', isAuthenticated, favoriteBooksController.addBook);
 router.post(
