@@ -24,7 +24,7 @@ const FavoriteBookSchema = new mongoose.Schema(
   },
   {
     timestamps: true, // adds createdAt and updatedAt automatically
-  },
+  }
 );
 
 module.exports = mongoose.model('FavoriteBook', FavoriteBookSchema);
