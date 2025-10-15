@@ -70,10 +70,6 @@
     },
     "/": {
       "get": {
-        "tags": [
-          "ProgrammingLanguages"
-        ],
-        "summary": "Gets all programming languages.",
         "description": "",
         "responses": {
           "200": {
@@ -1055,6 +1051,204 @@
         ]
       }
     },
+    "/languages/": {
+      "get": {
+        "tags": [
+          "languages"
+        ],
+        "summary": "Gets all programming languages.",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "languages"
+        ],
+        "summary": "Creates a new programming language.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "paradigm": {
+                  "example": "any"
+                },
+                "firstAppeared": {
+                  "example": "any"
+                },
+                "creator": {
+                  "example": "any"
+                },
+                "website": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/languages/{id}": {
+      "get": {
+        "tags": [
+          "languages"
+        ],
+        "summary": "Gets a programming language by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "languages"
+        ],
+        "summary": "Updates a programming language by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "paradigm": {
+                  "example": "any"
+                },
+                "firstAppeared": {
+                  "example": "any"
+                },
+                "creator": {
+                  "example": "any"
+                },
+                "website": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "languages"
+        ],
+        "summary": "Deletes a programming language by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "481": {
+            "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/scriptures/": {
       "get": {
         "tags": [
@@ -1157,245 +1351,6 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "book": {
-                  "example": "any"
-                },
-                "chapter": {
-                  "example": "any"
-                },
-                "verse": {
-                  "example": "any"
-                },
-                "text": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "481": {
-            "description": ""
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Scriptures"
-        ],
-        "summary": "Deletes a scripture",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "481": {
-            "description": ""
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/{username}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "username",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/{id}": {
-      "get": {
-        "tags": [
-          "ProgrammingLanguages"
-        ],
-        "summary": "Gets a programming language by ID.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ProgrammingLanguages"
-        ],
-        "summary": "Updates a programming language by ID.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "paradigm": {
-                  "example": "any"
-                },
-                "firstAppeared": {
-                  "example": "any"
-                },
-                "creator": {
-                  "example": "any"
-                },
-                "website": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "409": {
-            "description": "Conflict"
-          },
-          "481": {
-            "description": ""
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ProgrammingLanguages"
-        ],
-        "summary": "Deletes a programming language by ID.",
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "481": {
-            "description": ""
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/name/{recipeName}": {
-      "get": {
-        "tags": [
-          "Recipes"
-        ],
-        "summary": "Gets all recipes to match Name.",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "recipeName",
-            "in": "path",
-            "required": true,
             "type": "string",
             "description": "The name of the recipes to retrieve."
           }
@@ -1455,6 +1410,7 @@
             "required": true,
             "type": "string",
             "description": "Favorite Book ID"
+            "type": "string"
           },
           {
             "name": "body",
@@ -1463,10 +1419,17 @@
             "schema": {
               "type": "object",
               "properties": {
-                "title": {
-                  "type": "string",
-                  "example": "Updated Title"
+                "book": {
+                  "example": "any"
                 },
+                "chapter": {
+                  "example": "any"
+                },
+                "verse": {
+                  "example": "any"
+                },
+                "text": {
+                  "example": "any"
                 "author": {
                   "type": "string",
                   "example": "Updated Author"
@@ -1480,20 +1443,23 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Book updated successfully"
+          "204": {
+            "description": "No Content"
           },
           "400": {
-            "description": "Validation error or bad ID"
+            "description": "Bad Request or bad ID"
           },
           "401": {
             "description": "Unauthorized — requires authentication"
           },
           "404": {
-            "description": "Book not found"
+            "description": "Not Found"
           },
           "481": {
             "description": ""
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [
@@ -1504,21 +1470,24 @@
       },
       "delete": {
         "tags": [
-          "FavoriteBooks"
+          "Scriptures"
         ],
-        "description": "Delete a favorite book by ID (Protected: requires OAuth login)",
+        "summary": "Deletes a scripture",
+        "description": " (Protected: requires OAuth login)",
         "parameters": [
           {
-            "name": "bookId",
+            "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "Favorite Book ID"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Book deleted successfully"
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "400": {
             "description": "Invalid ID format"
@@ -1527,7 +1496,7 @@
             "description": "Unauthorized — requires authentication"
           },
           "404": {
-            "description": "Book not found"
+            "description": "Not Found"
           },
           "481": {
             "description": ""
@@ -1623,4 +1592,12 @@
       "OAuth2": []
     }
   ]
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
 }

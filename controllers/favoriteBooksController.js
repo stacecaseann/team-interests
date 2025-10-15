@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const FavoriteBook = require('../schemas/favoriteBook');
 
 // GET /favoritebooks
@@ -20,7 +21,7 @@ const getAllBooks = async (req, res, next) => {
   */
   try {
     const books = await FavoriteBook.find();
-    res.status(200).json(books.map((b) => b.toObject()));
+    res.status(200).status(200).json(books.map((b) => b.toObject()));
   } catch (err) {
     next(err);
   }
@@ -45,9 +46,14 @@ const getBookById = async (req, res, next) => {
     #swagger.responses[404] = { description: "Book not found" }
   */
   try {
-    const book = await FavoriteBook.findById(req.params.bookId);
+    const { bookId } = req.params;
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(bookId)) {
+      return res.status(400).json({ error: 'Invalid book ID' });
+    }
+    const book = await FavoriteBook.findById(bookId);
     if (!book) return res.status(404).json({ error: 'Book not found' });
-    res.status(200).json(book.toObject());
+    res.status(200).status(200).json(book.toObject());
   } catch (err) {
     if (err.name === 'CastError') {
       return res.status(400).json({ error: 'Invalid book ID format' });
@@ -144,13 +150,16 @@ const updateBook = async (req, res, next) => {
     #swagger.responses[401] = { description: "Unauthorized — requires authentication" }
   */
   try {
-    const updated = await FavoriteBook.findByIdAndUpdate(
-      req.params.bookId,
-      req.body,
-      { new: true, runValidators: true }
-    );
+    const { bookId } = req.params;
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(bookId)) {
+      return res.status(400).json({ error: 'Invalid book ID' });
+    }
+    const updated = await FavoriteBook.findByIdAndUpdate(bookId, req.body, {
+      new: true,
+    });
     if (!updated) return res.status(404).json({ error: 'Book not found' });
-    res.status(200).json(updated.toObject());
+    res.status(200).status(200).json(updated.toObject());
   } catch (err) {
     if (err.name === 'ValidationError') {
       return res.status(400).json({ error: err.message });
@@ -180,9 +189,14 @@ const deleteBook = async (req, res, next) => {
     #swagger.responses[401] = { description: "Unauthorized — requires authentication" }
   */
   try {
-    const deleted = await FavoriteBook.findByIdAndDelete(req.params.bookId);
+    const { bookId } = req.params;
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(bookId)) {
+      return res.status(400).json({ error: 'Invalid book ID' });
+    }
+    const deleted = await FavoriteBook.findByIdAndDelete(bookId);
     if (!deleted) return res.status(404).json({ error: 'Book not found' });
-    res.status(200).json({ message: 'Book deleted successfully' });
+    res.status(200).status(200).json({ message: 'Book deleted successfully' });
   } catch (err) {
     if (err.name === 'CastError') {
       return res.status(400).json({ error: 'Invalid book ID format' });

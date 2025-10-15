@@ -1,7 +1,8 @@
-const ProgrammingLanguage = require('../schemas/programmingLanguageSchema.js');
+const mongoose = require('mongoose');
+const ProgrammingLanguage = require('../schemas/LanguageSchema.js');
 
 const getLanguages = async (req, res) => {
-  //#swagger.tags = ['ProgrammingLanguages']
+  //#swagger.tags = ['languages']
   //#swagger.summary = 'Gets all programming languages.'
   try {
     const result = await ProgrammingLanguage.find();
@@ -17,13 +18,16 @@ const getLanguages = async (req, res) => {
 };
 
 const getLanguageById = async (req, res) => {
-  //#swagger.tags = ['ProgrammingLanguages']
+  //#swagger.tags = ['languages']
   //#swagger.summary = 'Gets a programming language by ID.'
   const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'Invalid language ID' });
+  }
   try {
     const result = await ProgrammingLanguage.findById(id);
     if (!result) {
-      return res.status(404).json({ error: 'Programming language not found' });
+      return res.status(404).json({ error: 'Language not found' });
     }
     return res.status(200).json(result);
   } catch (err) {
@@ -34,7 +38,7 @@ const getLanguageById = async (req, res) => {
 };
 
 const createLanguage = async (req, res) => {
-  //#swagger.tags = ['ProgrammingLanguages']
+  //#swagger.tags = ['languages']
   //#swagger.summary = 'Creates a new programming language.'
   try {
     const result = await ProgrammingLanguage.create({
@@ -65,7 +69,7 @@ const createLanguage = async (req, res) => {
 };
 
 const updateLanguage = async (req, res) => {
-  //#swagger.tags = ['ProgrammingLanguages']
+  //#swagger.tags = ['languages']
   //#swagger.summary = 'Updates a programming language by ID.'
   const { id } = req.params;
   try {
@@ -104,7 +108,7 @@ const updateLanguage = async (req, res) => {
 };
 
 const deleteLanguage = async (req, res) => {
-  //#swagger.tags = ['ProgrammingLanguages']
+  //#swagger.tags = ['languages']
   //#swagger.summary = 'Deletes a programming language by ID.'
   const { id } = req.params;
   try {
