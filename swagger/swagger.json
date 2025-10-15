@@ -70,6 +70,10 @@
     },
     "/": {
       "get": {
+        "tags": [
+          "languages"
+        ],
+        "summary": "Gets all programming languages.",
         "description": "",
         "responses": {
           "200": {
@@ -115,11 +119,16 @@
       },
       "post": {
         "tags": [
-          "ProgrammingLanguages"
+          "languages"
         ],
         "summary": "Creates a new programming language.",
         "description": "",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
@@ -156,13 +165,10 @@
             "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized — requires authentication"
+            "description": "Unauthorized"
           },
           "409": {
             "description": "Conflict"
-          },
-          "481": {
-            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -225,6 +231,11 @@
         ],
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "recipe",
             "in": "body",
             "description": "The recipe to create.",
@@ -241,8 +252,8 @@
           "400": {
             "description": "Bad Request"
           },
-          "481": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -299,6 +310,11 @@
             "description": "The ID of the recipe to update."
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "recipe",
             "in": "body",
             "description": "The recipe data to update.",
@@ -315,8 +331,8 @@
           "400": {
             "description": "Bad Request"
           },
-          "481": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -339,6 +355,11 @@
             "required": true,
             "type": "string",
             "description": "The ID of the recipe to delete."
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -348,8 +369,8 @@
           "400": {
             "description": "Bad Request"
           },
-          "481": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -416,6 +437,11 @@
         "description": "",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -450,11 +476,11 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "409": {
             "description": "Conflict"
-          },
-          "481": {
-            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -506,6 +532,11 @@
             "type": "string"
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -540,14 +571,14 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "409": {
             "description": "Conflict"
-          },
-          "481": {
-            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -566,6 +597,11 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -575,11 +611,11 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
-          },
-          "481": {
-            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -614,6 +650,11 @@
         "description": "",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -645,8 +686,8 @@
           "400": {
             "description": "Bad Request"
           },
-          "481": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -698,6 +739,11 @@
             "type": "string"
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -729,11 +775,11 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
-          },
-          "481": {
-            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -752,6 +798,11 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -761,11 +812,11 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
-          },
-          "481": {
-            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -822,6 +873,11 @@
         "description": "Add a new favorite book (Protected: requires OAuth login)",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -858,9 +914,6 @@
           },
           "401": {
             "description": "Unauthorized — requires authentication"
-          },
-          "481": {
-            "description": ""
           }
         },
         "security": [
@@ -914,6 +967,11 @@
             "description": "Favorite Book ID"
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -948,9 +1006,6 @@
           },
           "404": {
             "description": "Book not found"
-          },
-          "481": {
-            "description": ""
           }
         },
         "security": [
@@ -971,6 +1026,11 @@
             "required": true,
             "type": "string",
             "description": "Favorite Book ID"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -985,9 +1045,6 @@
           },
           "404": {
             "description": "Book not found"
-          },
-          "481": {
-            "description": ""
           }
         },
         "security": [
@@ -1004,6 +1061,11 @@
         ],
         "description": "Add multiple favorite books at once (Protected: requires OAuth login)",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
@@ -1039,9 +1101,6 @@
           },
           "401": {
             "description": "Unauthorized — requires authentication"
-          },
-          "481": {
-            "description": ""
           }
         },
         "security": [
@@ -1078,6 +1137,11 @@
         "description": "",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -1112,11 +1176,11 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "409": {
             "description": "Conflict"
-          },
-          "481": {
-            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -1168,6 +1232,11 @@
             "type": "string"
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -1202,14 +1271,14 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "409": {
             "description": "Conflict"
-          },
-          "481": {
-            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -1228,6 +1297,11 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1237,11 +1311,11 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
-          },
-          "481": {
-            "description": ""
           },
           "500": {
             "description": "Internal Server Error"
@@ -1273,6 +1347,11 @@
         "description": "",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -1301,8 +1380,8 @@
           "400": {
             "description": "Bad Request"
           },
-          "481": {
-            "description": ""
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1349,6 +1428,265 @@
         "parameters": [
           {
             "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "book": {
+                  "example": "any"
+                },
+                "chapter": {
+                  "example": "any"
+                },
+                "verse": {
+                  "example": "any"
+                },
+                "text": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Scriptures"
+        ],
+        "summary": "Deletes a scripture",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/{username}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "tags": [
+          "languages"
+        ],
+        "summary": "Gets a programming language by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "languages"
+        ],
+        "summary": "Updates a programming language by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "paradigm": {
+                  "example": "any"
+                },
+                "firstAppeared": {
+                  "example": "any"
+                },
+                "creator": {
+                  "example": "any"
+                },
+                "website": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "languages"
+        ],
+        "summary": "Deletes a programming language by ID.",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/name/{recipeName}": {
+      "get": {
+        "tags": [
+          "Recipes"
+        ],
+        "summary": "Gets all recipes to match Name.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "recipeName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1410,6 +1748,10 @@
             "required": true,
             "type": "string",
             "description": "Favorite Book ID"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
             "type": "string"
           },
           {
@@ -1419,17 +1761,10 @@
             "schema": {
               "type": "object",
               "properties": {
-                "book": {
-                  "example": "any"
+                "title": {
+                  "type": "string",
+                  "example": "Updated Title"
                 },
-                "chapter": {
-                  "example": "any"
-                },
-                "verse": {
-                  "example": "any"
-                },
-                "text": {
-                  "example": "any"
                 "author": {
                   "type": "string",
                   "example": "Updated Author"
@@ -1443,23 +1778,17 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "Book updated successfully"
           },
           "400": {
-            "description": "Bad Request or bad ID"
+            "description": "Validation error or bad ID"
           },
           "401": {
             "description": "Unauthorized — requires authentication"
           },
           "404": {
-            "description": "Not Found"
-          },
-          "481": {
-            "description": ""
-          },
-          "500": {
-            "description": "Internal Server Error"
+            "description": "Book not found"
           }
         },
         "security": [
@@ -1470,24 +1799,26 @@
       },
       "delete": {
         "tags": [
-          "Scriptures"
+          "FavoriteBooks"
         ],
-        "summary": "Deletes a scripture",
-        "description": " (Protected: requires OAuth login)",
+        "description": "Delete a favorite book by ID (Protected: requires OAuth login)",
         "parameters": [
           {
-            "name": "id",
+            "name": "bookId",
             "in": "path",
             "required": true,
+            "type": "string",
+            "description": "Favorite Book ID"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
+            "description": "Book deleted successfully"
           },
           "400": {
             "description": "Invalid ID format"
@@ -1496,10 +1827,7 @@
             "description": "Unauthorized — requires authentication"
           },
           "404": {
-            "description": "Not Found"
-          },
-          "481": {
-            "description": ""
+            "description": "Book not found"
           }
         },
         "security": [
@@ -1516,6 +1844,11 @@
         ],
         "description": "Add multiple favorite books at once (Protected: requires OAuth login)",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
@@ -1551,9 +1884,6 @@
           },
           "401": {
             "description": "Unauthorized — requires authentication"
-          },
-          "481": {
-            "description": ""
           }
         },
         "security": [
@@ -1592,12 +1922,4 @@
       "OAuth2": []
     }
   ]
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    }
-  }
 }
