@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 const ProgrammingLanguageSchema = new mongoose.Schema(
   {
@@ -13,7 +14,10 @@ const ProgrammingLanguageSchema = new mongoose.Schema(
     paradigm: {
       type: [String],
       required: [true, 'Paradigm is required'],
-      validate: [(arr) => arr.length > 0, 'At least one paradigm is required'],
+      validate: {
+        validator: (v) => Array.isArray(v) && v.length > 0,
+        message: 'Paradigm must have at least one entry',
+      },
     },
     firstAppeared: {
       type: Number,
@@ -33,10 +37,8 @@ const ProgrammingLanguageSchema = new mongoose.Schema(
       trim: true,
       maxlength: [100, 'Website cannot exceed 100 characters'],
       validate: {
-        validator: function (v) {
-          return !v || /^https?:\/\/.+\..+/.test(v);
-        },
-        message: 'Website must be a valid URL',
+        validator: (v) => validator.isURL(v),
+        message: 'Website is not a valid URL',
       },
     },
     description: {
@@ -50,7 +52,4 @@ const ProgrammingLanguageSchema = new mongoose.Schema(
   },
 );
 
-module.exports = mongoose.model(
-  'ProgrammingLanguage',
-  ProgrammingLanguageSchema,
-);
+module.exports = mongoose.model('language', ProgrammingLanguageSchema);

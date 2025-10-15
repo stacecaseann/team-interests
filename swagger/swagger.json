@@ -700,9 +700,6 @@
                 "name": "main"
               }
             }
-          },
-          "481": {
-            "description": ""
           }
         }
       },
@@ -772,6 +769,9 @@
         "responses": {
           "200": {
             "description": "Favorite book retrieved successfully"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "404": {
             "description": "Book not found"
@@ -847,6 +847,9 @@
         "responses": {
           "200": {
             "description": "Book deleted successfully"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "404": {
             "description": "Book not found"
