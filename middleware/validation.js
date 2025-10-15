@@ -309,14 +309,6 @@ const validateSpeakerUpdateData = [
     .withMessage('A Quote is required to be between 2 and 1000 characters'),
 ];
 
-const handleValidationErrors = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  return next();
-};
-
 // Validation rules for programming languages
 const validateProgrammingLanguageData = [
   body('name')
@@ -361,6 +353,14 @@ const validateProgrammingLanguageData = [
     .isLength({ max: 300 })
     .withMessage('Description must be at most 300 characters.'),
 ];
+
+const handleValidationErrors = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  return next();
+};
 
 module.exports = {
   validateObjectId,

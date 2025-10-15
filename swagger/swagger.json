@@ -948,6 +948,9 @@
           "400": {
             "description": "Invalid book ID format"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "404": {
             "description": "Book not found"
           }

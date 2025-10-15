@@ -31,4 +31,44 @@ Content-Type: application/json
 }
 
 ### Delete a programming language by ID
-DELETE https://team-interests.onrender.com/languages/68df549232e56b9d340c9ca6
+DELETE https://team-interests.onrender.com/languages/68eb169c8fd23310406b461a
+
+
+#################################################################
+
+
+### Localhost Testing
+### Get all programming languages
+GET http://localhost:3003/languages
+
+### Get programming language by ID
+GET http://localhost:3003/languages
+
+### Create a new programming language
+POST http://localhost:3003/languages
+Content-Type: application/json; 
+
+{
+  "name": "Python",
+  "paradigm": ["Object-Oriented", "Imperative", "Functional"],
+  "firstAppeared": 1991,
+  "creator": "Guido van Rossum",
+  "website": "https://www.python.org",
+  "description": "Python is a popular, easy-to-read programming language."
+}
+
+### Update a programming language by ID
+PUT http://localhost:3003/languages/68eb169c8fd23310406b461a
+Content-Type: application/json;
+
+{
+  "name": "Python",
+  "paradigm": ["Object-Oriented", "Imperative", "Functional"],
+  "firstAppeared": 1991,
+  "creator": "Guido van Rossum",
+  "website": "https://www.python.org",
+  "description": "Python is a popular, easy-to-read programming language. Updated description."
+}
+
+### Delete a programming language by ID
+DELETE http://localhost:3003/languages/68eb169c8fd23310406b461a
