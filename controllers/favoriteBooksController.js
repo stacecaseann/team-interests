@@ -20,7 +20,7 @@ const getAllBooks = async (req, res, next) => {
   */
   try {
     const books = await FavoriteBook.find();
-    res.status(200).json(books);
+    res.status(200).json(books.map((b) => b.toObject()));
   } catch (err) {
     next(err);
   }
@@ -47,7 +47,7 @@ const getBookById = async (req, res, next) => {
   try {
     const book = await FavoriteBook.findById(req.params.bookId);
     if (!book) return res.status(404).json({ error: 'Book not found' });
-    res.status(200).json(book);
+    res.status(200).json(book.toObject());
   } catch (err) {
     if (err.name === 'CastError') {
       return res.status(400).json({ error: 'Invalid book ID format' });
@@ -79,7 +79,7 @@ const addBook = async (req, res, next) => {
     const { title, author, year } = req.body;
     const book = new FavoriteBook({ title, author, year });
     const saved = await book.save();
-    res.status(201).json(saved);
+    res.status(201).json(saved.toObject());
   } catch (err) {
     if (err.name === 'ValidationError') {
       return res.status(400).json({ error: err.message });
@@ -108,7 +108,7 @@ const createWithArray = async (req, res, next) => {
   */
   try {
     const saved = await FavoriteBook.insertMany(req.body, { ordered: true });
-    res.status(201).json(saved);
+    res.status(201).json(saved.map((b) => b.toObject()));
   } catch (err) {
     if (err.name === 'ValidationError') {
       return res.status(400).json({ error: err.message });
@@ -150,7 +150,7 @@ const updateBook = async (req, res, next) => {
       { new: true, runValidators: true }
     );
     if (!updated) return res.status(404).json({ error: 'Book not found' });
-    res.status(200).json(updated);
+    res.status(200).json(updated.toObject());
   } catch (err) {
     if (err.name === 'ValidationError') {
       return res.status(400).json({ error: err.message });
