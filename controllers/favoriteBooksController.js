@@ -21,7 +21,10 @@ const getAllBooks = async (req, res, next) => {
   */
   try {
     const books = await FavoriteBook.find();
-    res.status(200).status(200).json(books.map((b) => b.toObject()));
+    res
+      .status(200)
+      .status(200)
+      .json(books.map((b) => b.toObject()));
   } catch (err) {
     next(err);
   }
